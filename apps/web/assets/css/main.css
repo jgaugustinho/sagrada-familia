@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cores da Loja (HSL) */
+    /* Primária: #916c28 (39 57% 36%) | Secundária: #F4F0E9 (38 33% 94%) | Dark: #070401 (30 75% 2%) */
+    --background: 38 33% 94%;
+    --foreground: 30 75% 2%;
+
+    --card: 38 33% 97%;
+    --card-foreground: 30 75% 2%;
+
+    --popover: 38 33% 97%;
+    --popover-foreground: 30 75% 2%;
+
+    --primary: 39 57% 36%;
+    --primary-foreground: 38 33% 94%;
+
+    --secondary: 38 30% 90%;
+    --secondary-foreground: 30 75% 2%;
+
+    --muted: 38 30% 90%;
+    --muted-foreground: 30 15% 45%;
+
+    --accent: 38 30% 90%;
+    --accent-foreground: 30 75% 2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 38 20% 86%;
+    --input: 38 20% 86%;
+    --ring: 39 57% 36%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 38 33% 94%;
+    --sidebar-foreground: 30 75% 2%;
+    --sidebar-primary: 39 57% 36%;
+    --sidebar-primary-foreground: 38 33% 94%;
+    --sidebar-accent: 38 30% 90%;
+    --sidebar-accent-foreground: 30 75% 2%;
+    --sidebar-border: 38 20% 86%;
+    --sidebar-ring: 39 57% 36%;
+
+    --dark: 30 75% 2%;
+    --dark-foreground: 38 33% 94%;
+  }
+
+  .dark {
+    --background: 30 75% 2%;
+    --foreground: 38 33% 94%;
+
+    --card: 30 50% 5%;
+    --card-foreground: 38 33% 94%;
+
+    --popover: 30 50% 5%;
+    --popover-foreground: 38 33% 94%;
+
+    --primary: 39 57% 45%;
+    --primary-foreground: 30 75% 2%;
+
+    --secondary: 30 25% 12%;
+    --secondary-foreground: 38 33% 94%;
+
+    --muted: 30 25% 12%;
+    --muted-foreground: 38 20% 65%;
+
+    --accent: 30 25% 12%;
+    --accent-foreground: 38 33% 94%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 30 25% 14%;
+    --input: 30 25% 14%;
+    --ring: 39 57% 45%;
+
+    --sidebar-background: 30 75% 2%;
+    --sidebar-foreground: 38 33% 94%;
+    --sidebar-primary: 39 57% 45%;
+    --sidebar-primary-foreground: 30 75% 2%;
+    --sidebar-accent: 30 25% 12%;
+    --sidebar-accent-foreground: 38 33% 94%;
+    --sidebar-border: 30 25% 14%;
+    --sidebar-ring: 39 57% 45%;
+
+    --dark: 30 75% 2%;
+    --dark-foreground: 38 33% 94%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
