@@ -1,0 +1,159 @@
+<template>
+  <div class="grid grid-cols-12 gap-6 lg:gap-8 w-full">
+    <!-- Coluna de Subcategorias (8 colunas) -->
+    <div class="col-span-8">
+      <div class="flex items-center justify-between pb-4 mb-6 border-b border-border">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+            <component :is="category.icon" class="w-5 h-5" />
+          </div>
+          <h2 class="text-lg font-bold tracking-tight text-foreground">
+            {{ category.label }}
+          </h2>
+        </div>
+
+        <NuxtLink :to="categoryPath( category )" class="group/all inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors" @click="emit( 'close' )">
+          <span>Ver tudo</span>
+          <ArrowRight class="w-4 h-4 transition-transform group-hover/all:translate-x-1" />
+        </NuxtLink>
+      </div>
+
+      <div class="grid gap-x-6 lg:gap-x-8 gap-y-6" :class="groupColumns[ category.groups.length ] ?? 'grid-cols-3'">
+        <div
+          v-for="( group, index ) in category.groups"
+          :key="group.title"
+          class="rounded-lg p-2 -m-2 transition-colors"
+          :class="activeGroupIndex === index && category.groups.length > 1 ? 'bg-secondary/40' : ''"
+          @mouseenter="activeGroupIndex = index"
+          @focusin="activeGroupIndex = index"
+        >
+          <h3 class="text-xs font-bold uppercase tracking-wider text-primary mb-3">
+            {{ group.title }}
+          </h3>
+          <ul class="space-y-1">
+            <li v-for="sub in group.items" :key="sub.slug">
+              <NuxtLink
+                :to="`/c/${ category.slug }/${ sub.slug }`"
+                class="group/link flex items-center py-1 text-sm text-muted-foreground hover:text-primary hover:font-semibold transition-all duration-200 hover:translate-x-1"
+                @click="emit( 'close' )"
+              >
+                <span>{{ sub.label }}</span>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card de Destaque Lateral (4 colunas) -->
+    <div class="col-span-4 pl-6 lg:pl-8 border-l border-border">
+      <div v-if="activeGroup" class="relative h-full min-h-[260px] overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary/60 text-primary-foreground flex flex-col justify-end p-5">
+        <Transition name="mega-featured">
+          <img
+            :key="activeGroup.featured.imageUrl"
+            :src="activeGroup.featured.imageUrl"
+            :alt="activeGroup.featured.title"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </Transition>
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/5" />
+
+        <div class="relative z-10">
+          <Transition name="mega-featured-text" mode="out-in">
+            <div :key="activeGroup.title">
+              <span class="inline-flex flex-wrap items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/80 mb-1">
+                <span>{{ category.label }}</span>
+                <span class="text-white/50">&gt;</span>
+                <span>{{ activeGroup.title }}</span>
+              </span>
+              <p class="text-lg font-bold leading-tight text-white">
+                {{ activeGroup.featured.title }}
+              </p>
+              <p class="mt-1 text-sm text-white/85">
+                {{ activeGroup.featured.description }}
+              </p>
+            </div>
+          </Transition>
+
+          <NuxtLink :to="categoryPath( category )" class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary-foreground px-4 py-2 text-sm font-semibold text-primary hover:bg-white transition-colors" @click="emit( 'close' )">
+            {{ category.ctaLabel }}
+            <ArrowRight class="w-4 h-4" />
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { computed, ref, watch } from 'vue';
+  import { ArrowRight } from '@lucide/vue';
+  import { categoryPath, type MenuCategory } from '@/data/main-menu';
+
+  const props = defineProps<{
+    category: MenuCategory;
+  }>();
+
+  const emit = defineEmits<{
+    ( e: 'close' ): void;
+  }>();
+
+  const activeGroupIndex = ref( 0 );
+
+  watch(
+    () => props.category.slug,
+    () => {
+      activeGroupIndex.value = 0;
+    }
+  );
+
+  const activeGroup = computed( () => {
+    return props.category.groups[ activeGroupIndex.value ] ?? props.category.groups[ 0 ] ?? null;
+  } );
+
+  const groupColumns: Record<number, string> = {
+    1: 'grid-cols-1',
+    2: 'grid-cols-2',
+    3: 'grid-cols-3'
+  };
+</script>
+
+<style scoped>
+  .mega-featured-enter-active, .mega-featured-leave-active {
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .mega-featured-enter-from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  .mega-featured-leave-to {
+    opacity: 0;
+  }
+
+  .mega-featured-text-enter-active, .mega-featured-text-leave-active {
+    transition: opacity 0.16s ease, transform 0.16s ease;
+  }
+
+  .mega-featured-text-enter-from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  .mega-featured-text-leave-to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mega-featured-enter-active,
+    .mega-featured-leave-active,
+    .mega-featured-text-enter-active,
+    .mega-featured-text-leave-active {
+      transition: none;
+    }
+  }
+</style>
+
