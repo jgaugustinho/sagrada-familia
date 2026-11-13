@@ -11,7 +11,7 @@
           <!-- Left highlight: Todas as categorias -->
           <div class="flex items-center pr-6 lg:pr-8 border-r border-primary-foreground/20 shrink-0" @mouseenter="openAll" @focusin="openAll">
             <button type="button" class="group relative flex flex-col items-center justify-center gap-1.5 px-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50" :aria-expanded="isAllOpen" aria-haspopup="true">
-              <component :is="allCategories.icon" class="w-6 h-6 stroke-[1.75] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none group-hover:-translate-y-1 group-hover:scale-110 group-hover:-rotate-6" :class="isAllOpen && '-translate-y-1 scale-110 -rotate-6'" />
+              <component class="category-icon w-6 h-6 stroke-[1.75]" :is="allCategories.icon" />
               <span class="text-xs lg:text-[13px] font-semibold tracking-wide whitespace-nowrap">
                 {{ allCategories.label }}
               </span>
@@ -23,7 +23,7 @@
           <ul class="flex items-center justify-between flex-1 gap-2 lg:gap-4 pl-2 lg:pl-4">
             <li v-for="item in mainMenu" :key="item.slug" class="shrink-0" @mouseenter="openMenu( item.slug )" @focusin="openMenu( item.slug )">
               <NuxtLink :to="`/c/${ item.slug }`" class="group relative flex flex-col items-center justify-center gap-1.5 px-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/50" :aria-expanded="activeSlug === item.slug" aria-haspopup="true" @click="closeNow">
-                <component :is="item.icon" class="w-6 h-6 stroke-[1.75] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none group-hover:-translate-y-1 group-hover:scale-110 group-hover:-rotate-6" :class="activeSlug === item.slug && '-translate-y-1 scale-110 -rotate-6'" />
+                <component class="category-icon w-6 h-6 stroke-[1.75]" :is="item.icon" />
                 <span class="text-xs lg:text-[13px] font-medium tracking-wide whitespace-nowrap">
                   {{ item.label }}
                 </span>
@@ -160,6 +160,24 @@
     transform: translateY(-8px);
   }
 
+  .group:hover .category-icon {
+    animation: category-pulse 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes category-pulse {
+    0% {
+      transform: scale(1);
+    }
+
+    45% {
+      transform: scale(1.18);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
   .mega-content {
     animation: mega-content-in 0.18s ease;
   }
@@ -177,6 +195,10 @@
   @media (prefers-reduced-motion: reduce) {
     .mega-fade-enter-active, .mega-fade-leave-active, .mega-panel-enter-active, .mega-panel-leave-active {
       transition: none;
+    }
+
+    .group:hover .category-icon {
+      animation: none;
     }
 
     .mega-content {
