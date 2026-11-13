@@ -3,9 +3,7 @@
     <div class="container mx-auto px-4 py-3 md:py-4 grid grid-cols-[1fr_auto_1fr] md:flex items-center justify-between gap-y-3 md:gap-8">
       <!-- Mobile Left: Menu button -->
       <div class="flex items-center justify-start md:hidden">
-        <button type="button" class="p-2 -ml-2 rounded-md text-foreground hover:text-primary hover:bg-secondary/60 transition-colors" aria-label="Abrir menu">
-          <Menu class="w-6 h-6" />
-        </button>
+        <MobileMenu />
       </div>
 
       <!-- Logo: Centered on mobile, Left on desktop -->
@@ -45,7 +43,8 @@
 
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
-  import { Menu, Search, ShoppingCart, User } from '@lucide/vue';
+  import { Search, ShoppingCart, User } from '@lucide/vue';
+  import MobileMenu from '@/components/header/MobileMenu.vue';
 
   const searchQuery = ref( '' );
   const isSearchFocused = ref( false );

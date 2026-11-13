@@ -70,19 +70,59 @@ export default <Partial<Config>>{
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 'var(--reka-accordion-content-height, var(--radix-accordion-content-height))' },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
+          from: { height: 'var(--reka-accordion-content-height, var(--radix-accordion-content-height))' },
           to: { height: '0' },
         },
         'collapsible-down': {
           from: { height: '0' },
-          to: { height: 'var(--radix-collapsible-content-height)' },
+          to: { height: 'var(--reka-collapsible-content-height, var(--radix-collapsible-content-height))' },
         },
         'collapsible-up': {
-          from: { height: 'var(--radix-collapsible-content-height)' },
+          from: { height: 'var(--reka-collapsible-content-height, var(--radix-collapsible-content-height))' },
           to: { height: '0' },
+        },
+        'fade-in': {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        'fade-out': {
+          from: { opacity: '1' },
+          to: { opacity: '0' },
+        },
+        'sheet-in-left': {
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(0)' },
+        },
+        'sheet-out-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        },
+        'sheet-in-right': {
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(0)' },
+        },
+        'sheet-out-right': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(100%)' },
+        },
+        'sheet-in-top': {
+          from: { transform: 'translateY(-100%)' },
+          to: { transform: 'translateY(0)' },
+        },
+        'sheet-out-top': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(-100%)' },
+        },
+        'sheet-in-bottom': {
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0)' },
+        },
+        'sheet-out-bottom': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(100%)' },
         },
       },
       animation: {
@@ -90,6 +130,16 @@ export default <Partial<Config>>{
         'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-out',
         'collapsible-up': 'collapsible-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.2s ease-out',
+        'fade-out': 'fade-out 0.2s ease-in',
+        'sheet-in-left': 'sheet-in-left 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+        'sheet-out-left': 'sheet-out-left 0.2s ease-in',
+        'sheet-in-right': 'sheet-in-right 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+        'sheet-out-right': 'sheet-out-right 0.2s ease-in',
+        'sheet-in-top': 'sheet-in-top 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+        'sheet-out-top': 'sheet-out-top 0.2s ease-in',
+        'sheet-in-bottom': 'sheet-in-bottom 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+        'sheet-out-bottom': 'sheet-out-bottom 0.2s ease-in',
       },
     },
   },

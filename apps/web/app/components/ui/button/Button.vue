@@ -19,9 +19,7 @@ import { cn } from "cn"
 import { Primitive } from "reka-ui"
 import { buttonVariants } from "."
 
-interface Props extends /* @vue-ignore */ PrimitiveProps {
-  as?: PrimitiveProps[ 'as' ];
-  asChild?: PrimitiveProps[ 'asChild' ];
+interface Props extends PrimitiveProps {
   variant?: ButtonVariants["variant"]
   size?: ButtonVariants["size"]
   class?: HTMLAttributes["class"]
