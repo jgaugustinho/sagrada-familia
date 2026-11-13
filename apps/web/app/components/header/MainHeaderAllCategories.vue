@@ -14,9 +14,11 @@
             </li>
           </ul>
 
-          <!-- Expandable right panel (only for categories with subgroups) -->
+          <!-- Expandable right panel (only for categories with subgroups).
+               No :key here on purpose: keeping a single persistent element avoids two panels
+               coexisting while switching categories (which caused a visible flash). -->
           <Transition name="all-content">
-            <div v-if="activeItem && activeItem.groups.length > 0" :key="activeItem.slug" class="all-content flex-1 min-w-[640px] p-6 lg:p-8">
+            <div v-if="activeItem && activeItem.groups.length > 0" class="all-content flex-1 min-w-[640px] p-6 lg:p-8">
               <MainHeaderCategoryPanel :category="activeItem" @close="emit( 'close' )" />
             </div>
           </Transition>
@@ -104,8 +106,6 @@
 
   .all-content-leave-active {
     transition: opacity 0.1s ease;
-    position: absolute;
-    visibility: hidden;
   }
 
   .all-content-enter-from, .all-content-leave-to {

@@ -75,11 +75,6 @@
               </p>
             </div>
           </Transition>
-
-          <NuxtLink :to="categoryPath( category )" class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-primary-foreground px-4 py-2 text-sm font-semibold text-primary hover:bg-white transition-colors" @click="emit( 'close' )">
-            {{ category.ctaLabel }}
-            <ArrowRight class="w-4 h-4" />
-          </NuxtLink>
         </div>
       </div>
     </div>
