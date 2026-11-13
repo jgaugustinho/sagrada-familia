@@ -5,7 +5,7 @@
       <div v-if="isMenuOpen" class="fixed inset-x-0 bottom-0 z-0 bg-black/25 backdrop-blur-[2px] pointer-events-none" :style="{ top: `${ backdropTop }px` }" aria-hidden="true" />
     </Transition>
 
-    <nav ref="navRef" class="relative z-10 bg-primary text-primary-foreground border-b border-black/10 shadow-sm" aria-label="Menu principal de categorias">
+    <nav ref="navRef" class="relative z-10 bg-primary text-primary-foreground border-b border-black/10 shadow-sm" aria-label="Menu principal de categorias" @mouseenter="cancelClose">
       <div class="container mx-auto px-4">
         <div class="main-header-scroll flex items-center justify-between py-3 gap-4 overflow-x-auto">
           <!-- Left highlight: Todas as categorias -->
@@ -39,9 +39,9 @@
 
     <!-- Dropdown suspenso das categorias horizontais -->
     <Transition name="mega-panel">
-      <div v-if="activeCategory && activeCategory.groups.length > 0" class="absolute inset-x-0 top-full z-20" @mouseenter="cancelClose">
-        <div class="container mx-auto px-4">
-          <div :key="activeCategory.slug" class="mega-content bg-card text-card-foreground rounded-b-2xl border-x border-b border-border shadow-2xl p-6 lg:p-8">
+      <div v-if="activeCategory && activeCategory.groups.length > 0" class="absolute inset-x-0 top-full z-20 pointer-events-none">
+        <div class="container mx-auto px-4 pointer-events-none">
+          <div :key="activeCategory.slug" class="mega-content pointer-events-auto bg-card text-card-foreground rounded-b-2xl border-x border-b border-border shadow-2xl p-6 lg:p-8" @mouseenter="cancelClose">
             <MainHeaderCategoryPanel :category="activeCategory" @close="closeNow" />
           </div>
         </div>

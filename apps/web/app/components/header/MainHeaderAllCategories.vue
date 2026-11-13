@@ -1,8 +1,8 @@
 <template>
   <Transition name="all-panel">
-    <div v-if="open" class="absolute inset-x-0 top-full z-20" @mouseenter="emit( 'enter' )">
-      <div class="container mx-auto px-4">
-        <div class="all-card flex overflow-hidden bg-card text-card-foreground rounded-b-2xl border-x border-b border-border shadow-2xl" :style="{ width: activeItem && activeItem.groups.length > 0 ? '100%' : '18rem' }">
+    <div v-if="open" class="absolute inset-x-0 top-full z-20 pointer-events-none">
+      <div class="container mx-auto px-4 pointer-events-none">
+        <div class="all-card pointer-events-auto flex overflow-hidden bg-card text-card-foreground rounded-b-2xl border-x border-b border-border shadow-2xl" :style="{ width: activeItem && activeItem.groups.length > 0 ? '100%' : '18rem' }" @mouseenter="emit( 'enter' )">
           <!-- Vertical list -->
           <ul class="w-72 shrink-0 p-3 bg-secondary/30 border-r border-border" aria-label="Todas as categorias" @mouseleave="cancelHover">
             <li v-for="( item, index ) in allCategoriesMenu" :key="item.slug" :class="item.slug === 'todos' ? 'mt-2 pt-2 border-t border-border' : ''">
