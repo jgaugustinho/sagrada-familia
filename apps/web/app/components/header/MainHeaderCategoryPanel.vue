@@ -5,14 +5,14 @@
       <div class="flex items-center justify-between pb-4 mb-6 border-b border-border">
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-            <component :is="category.icon" class="w-5 h-5" />
+            <component class="w-5 h-5" :is="category.icon" />
           </div>
           <h2 class="text-lg font-bold tracking-tight text-foreground">
             {{ category.label }}
           </h2>
         </div>
 
-        <NuxtLink :to="categoryPath( category )" class="group/all inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors" @click="emit( 'close' )">
+        <NuxtLink class="group/all inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors" :to="categoryPath( category )" @click="emit( 'close' )">
           <span>Ver tudo</span>
           <ArrowRight class="w-4 h-4 transition-transform group-hover/all:translate-x-1" />
         </NuxtLink>
@@ -20,9 +20,9 @@
 
       <div class="grid gap-x-6 lg:gap-x-8 gap-y-6" :class="groupColumns[ category.groups.length ] ?? 'grid-cols-3'">
         <div
+          class="rounded-lg p-2 -m-2 transition-colors"
           v-for="( group, index ) in category.groups"
           :key="group.title"
-          class="rounded-lg p-2 -m-2 transition-colors"
           :class="activeGroupIndex === index && category.groups.length > 1 ? 'bg-secondary/40' : ''"
           @mouseenter="activeGroupIndex = index"
           @focusin="activeGroupIndex = index"
@@ -33,8 +33,8 @@
           <ul class="space-y-1">
             <li v-for="sub in group.items" :key="sub.slug">
               <NuxtLink
-                :to="`/c/${ category.slug }/${ sub.slug }`"
                 class="group/link flex items-center py-1 text-sm text-muted-foreground hover:text-primary hover:font-semibold transition-all duration-200 hover:translate-x-1"
+                :to="`/c/${ category.slug }/${ sub.slug }`"
                 @click="emit( 'close' )"
               >
                 <span>{{ sub.label }}</span>
@@ -47,13 +47,13 @@
 
     <!-- Card de Destaque Lateral (4 colunas) -->
     <div class="col-span-4 pl-6 lg:pl-8 border-l border-border">
-      <div v-if="activeGroup" class="relative h-full min-h-[260px] overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary/60 text-primary-foreground flex flex-col justify-end p-5">
+      <div class="relative h-full min-h-[260px] overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary/60 text-primary-foreground flex flex-col justify-end p-5" v-if="activeGroup">
         <Transition name="mega-featured">
           <img
+            class="absolute inset-0 w-full h-full object-cover"
             :key="activeGroup.featured.imageUrl"
             :src="activeGroup.featured.imageUrl"
             :alt="activeGroup.featured.title"
-            class="absolute inset-0 w-full h-full object-cover"
           />
         </Transition>
 
@@ -151,4 +151,3 @@
     }
   }
 </style>
-

@@ -182,4 +182,3 @@
     mediaQuery?.removeEventListener( 'change', handleDesktopMediaChange );
   } );
 </script>
-

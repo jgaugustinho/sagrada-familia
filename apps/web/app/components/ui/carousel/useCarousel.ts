@@ -105,4 +105,3 @@ export function useCarousel(): CarouselContext {
 
   return carouselState;
 }
-

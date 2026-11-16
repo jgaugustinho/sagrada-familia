@@ -10,4 +10,3 @@
   import HeroSlider from '@/components/home/HeroSlider.vue';
   import TrustBar from '@/components/home/TrustBar.vue';
 </script>
-

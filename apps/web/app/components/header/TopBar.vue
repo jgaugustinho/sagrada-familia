@@ -3,8 +3,8 @@
     <div class="container mx-auto px-4">
       <!-- Desktop: Displays all items side-by-side -->
       <div class="hidden md:flex items-center justify-between py-2 text-center font-medium">
-        <div v-for="( item, index ) in notices" :key="index" class="flex items-center gap-2">
-          <component :is="item.icon" class="w-3.5 h-3.5 text-primary shrink-0" />
+        <div class="flex items-center gap-2" v-for="( item, index ) in notices" :key="index">
+          <component class="w-3.5 h-3.5 text-primary shrink-0" :is="item.icon" />
           <span v-html="item.text" />
         </div>
       </div>
@@ -12,8 +12,8 @@
       <!-- Mobile: Carousel cycling one active notice at a time -->
       <div class="md:hidden relative h-9 flex items-center justify-center font-medium">
         <Transition name="slide" mode="out-in">
-          <div :key="currentIndex" class="flex items-center justify-center gap-2 px-2 text-center">
-            <component :is="notices[ currentIndex ]?.icon" class="w-3.5 h-3.5 text-primary shrink-0" />
+          <div class="flex items-center justify-center gap-2 px-2 text-center" :key="currentIndex">
+            <component class="w-3.5 h-3.5 text-primary shrink-0" :is="notices[ currentIndex ]?.icon" />
             <span v-html="notices[ currentIndex ]?.text" />
           </div>
         </Transition>

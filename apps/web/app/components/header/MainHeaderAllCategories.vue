@@ -1,15 +1,15 @@
 <template>
   <Transition name="all-panel">
-    <div v-if="open" class="absolute inset-x-0 top-full z-20 pointer-events-none">
+    <div class="absolute inset-x-0 top-full z-20 pointer-events-none" v-if="open">
       <div class="container mx-auto px-4 pointer-events-none">
         <div class="all-card pointer-events-auto flex overflow-hidden bg-card text-card-foreground rounded-b-2xl border-x border-b border-border shadow-2xl" :style="{ width: activeItem && activeItem.groups.length > 0 ? '100%' : '18rem' }" @mouseenter="emit( 'enter' )">
           <!-- Vertical list -->
           <ul class="w-72 shrink-0 p-3 bg-secondary/30 border-r border-border" aria-label="Todas as categorias" @mouseleave="cancelHover">
             <li v-for="( item, index ) in allCategoriesMenu" :key="item.slug" :class="item.slug === 'todos' ? 'mt-2 pt-2 border-t border-border' : ''">
-              <NuxtLink :to="categoryPath( item )" class="group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" :class="[ activeIndex === index ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-secondary/60', item.slug === 'todos' ? 'font-semibold text-primary' : 'font-medium' ]" @mouseenter="scheduleActivate( index )" @focusin="activate( index )" @click="emit( 'close' )">
-                <component :is="item.icon" class="w-5 h-5 shrink-0 stroke-[1.75] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none group-hover/item:scale-110 group-hover/item:-rotate-6" />
+              <NuxtLink class="group/item flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50" :to="categoryPath( item )" :class="[ activeIndex === index ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-secondary/60', item.slug === 'todos' ? 'font-semibold text-primary' : 'font-medium' ]" @mouseenter="scheduleActivate( index )" @focusin="activate( index )" @click="emit( 'close' )">
+                <component class="w-5 h-5 shrink-0 stroke-[1.75] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none group-hover/item:scale-110 group-hover/item:-rotate-6" :is="item.icon" />
                 <span class="flex-1 truncate">{{ item.label }}</span>
-                <ChevronRight v-if="item.groups.length > 0" class="w-4 h-4 shrink-0 text-muted-foreground transition-transform duration-200" :class="activeIndex === index ? 'translate-x-0.5 text-primary' : ''" />
+                <ChevronRight class="w-4 h-4 shrink-0 text-muted-foreground transition-transform duration-200" v-if="item.groups.length > 0" :class="activeIndex === index ? 'translate-x-0.5 text-primary' : ''" />
               </NuxtLink>
             </li>
           </ul>
@@ -18,7 +18,7 @@
                No :key here on purpose: keeping a single persistent element avoids two panels
                coexisting while switching categories (which caused a visible flash). -->
           <Transition name="all-content">
-            <div v-if="activeItem && activeItem.groups.length > 0" class="all-content flex-1 min-w-[640px] p-6 lg:p-8">
+            <div class="all-content flex-1 min-w-[640px] p-6 lg:p-8" v-if="activeItem && activeItem.groups.length > 0">
               <MainHeaderCategoryPanel :category="activeItem" @close="emit( 'close' )" />
             </div>
           </Transition>
@@ -39,8 +39,7 @@
   }>();
 
   const emit = defineEmits<{
-    ( e: 'close' ): void;
-    ( e: 'enter' ): void;
+    ( e: 'close' | 'enter' ): void;
   }>();
 
   const HOVER_INTENT_MS = 90;

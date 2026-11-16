@@ -1,18 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/eslint'],
-  css: ['~~/assets/css/main.css'],
+export default defineNuxtConfig( {
+  modules: [ '@nuxtjs/tailwindcss', '@nuxt/eslint' ],
   components: [
     {
       path: '~/components',
-      extensions: ['.vue'],
-    },
+      extensions: [ '.vue' ]
+    }
   ],
+  devtools: { enabled: true },
+  css: [ '~~/assets/css/main.css' ],
+  compatibilityDate: '2025-07-15',
   postcss: {
     plugins: {
       'tailwindcss/nesting/index.js': {},
-      'tailwindcss/nesting': false,
-    },
+      'tailwindcss/nesting': false
+    }
   },
   eslint: {
     config: {
@@ -23,7 +25,5 @@ export default defineNuxtConfig({
         commaDangle: 'never'
       }
     }
-  },
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: true }
-})
+  }
+} );
