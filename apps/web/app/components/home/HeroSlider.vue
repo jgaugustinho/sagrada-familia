@@ -59,18 +59,11 @@
 </template>
 
 <script setup lang="ts">
-  import { onUnmounted, ref } from 'vue';
   import Autoplay from 'embla-carousel-autoplay';
+  import { onUnmounted, ref } from 'vue';
   import { ArrowRight } from '@lucide/vue';
   import { Button } from '@/components/ui/button';
-  import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-    type CarouselApi
-  } from '@/components/ui/carousel';
+  import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 
   interface HeroSlide {
     slug: string;
