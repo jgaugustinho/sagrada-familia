@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto px-4 pt-6 pb-4">
+  <section class="container mx-auto px-4">
     <Carousel class="rounded-2xl overflow-hidden shadow-md border border-border bg-dark" aria-label="Destaques da loja" :opts="carouselOptions" :plugins="carouselPlugins" @init-api="onInitApi" @keydown.left="resetAutoplay" @keydown.right="resetAutoplay">
       <CarouselContent :class="[ 'ml-0', isDragging ? 'md:cursor-grabbing select-none' : '' ]">
         <CarouselItem class="pl-0" v-for="( slide, index ) in slides" :key="slide.slug">

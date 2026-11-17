@@ -326,7 +326,7 @@ export const mainMenu: MenuCategory[] = [
   }
 ];
 
-const devocionais: MenuCategory = {
+export const devocionais: MenuCategory = {
   label: 'Devocionais',
   slug: 'devocionais',
   icon: HandHeart,

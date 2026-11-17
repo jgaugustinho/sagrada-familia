@@ -1,9 +1,15 @@
 <template>
   <article class="group relative flex flex-col h-full bg-card text-card-foreground border border-border rounded-2xl overflow-hidden shadow-sm transition-all duration-300 ease-out motion-reduce:transition-none hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:shadow-lg hover:border-primary/35">
     <NuxtLink class="relative block aspect-square w-full overflow-hidden bg-secondary/40" :to="`/p/${ product.slug }`">
-      <Badge class="absolute top-3 left-3 z-10 rounded-full px-2.5 py-1 font-bold tracking-wide shadow-sm hover:bg-primary" v-if="discountPercentage !== null">
-        -{{ discountPercentage }}%
-      </Badge>
+      <div class="absolute top-3 left-3 z-10 flex flex-wrap items-center gap-1.5" v-if="product.isNew || discountPercentage !== null">
+        <Badge class="rounded-full px-2.5 py-1 font-bold tracking-wide shadow-sm bg-dark text-dark-foreground hover:bg-dark" v-if="product.isNew">
+          Novo
+        </Badge>
+
+        <Badge class="rounded-full px-2.5 py-1 font-bold tracking-wide shadow-sm hover:bg-primary" v-if="discountPercentage !== null">
+          -{{ discountPercentage }}%
+        </Badge>
+      </div>
 
       <img class="w-full h-full object-cover transition-all duration-500 ease-out motion-reduce:transition-none group-hover:opacity-0 group-hover:scale-105 motion-reduce:group-hover:scale-100" loading="lazy" :src="product.imageUrl" :alt="product.imageAlt" />
 

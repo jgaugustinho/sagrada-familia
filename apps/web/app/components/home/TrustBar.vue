@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto px-4 pb-6" aria-label="Vantagens e garantias da loja">
+  <section class="container mx-auto px-4" aria-label="Vantagens e garantias da loja">
     <div class="bg-card text-card-foreground border border-border rounded-2xl shadow-sm overflow-hidden">
       <ul class="grid grid-cols-2 lg:grid-cols-4">
         <li
