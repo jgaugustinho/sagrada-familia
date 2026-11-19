@@ -61,7 +61,7 @@
               </div>
             </div>
 
-            <div class="space-y-2.5 pt-2" v-if="firstReading || secondReading">
+            <div class="space-y-2.5 pt-2" v-if="firstReading || psalm || secondReading">
               <p class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                 Leituras da Santa Missa
               </p>
@@ -70,6 +70,11 @@
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background border border-border text-xs font-medium text-foreground" v-if="firstReading">
                   <BookOpen class="w-3.5 h-3.5 text-primary shrink-0" />
                   <span>1ª Leitura: <strong class="font-semibold">{{ firstReading.referencia }}</strong></span>
+                </span>
+
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background border border-border text-xs font-medium text-foreground" v-if="psalm">
+                  <BookOpen class="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Salmo: <strong class="font-semibold">{{ psalm.referencia }}</strong></span>
                 </span>
 
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-background border border-border text-xs font-medium text-foreground" v-if="secondReading">
@@ -93,11 +98,14 @@
               </div>
 
               <div class="relative">
-                <p class="text-sm sm:text-base text-foreground/90 leading-relaxed whitespace-pre-line" :class="isLongGospel && !isExpanded ? 'line-clamp-6' : ''">
-                  {{ gospel.texto }}
+                <p class="text-sm sm:text-base text-foreground/90 leading-relaxed whitespace-pre-line" ref="gospelTextRef" :class="isExpanded ? '' : 'line-clamp-6'">
+                  <template v-for="( segment, index ) in gospelSegments" :key="index">
+                    <sup class="text-[11px] font-semibold text-stone-400 align-super leading-none mr-1 select-none" v-if="segment.isVerse">{{ segment.text }}</sup>
+                    <template v-else>{{ segment.text }}</template>
+                  </template>
                 </p>
 
-                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card to-transparent" aria-hidden="true" v-if="isLongGospel && !isExpanded" />
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card to-transparent" aria-hidden="true" v-if="isGospelTruncated && !isExpanded" />
               </div>
             </div>
 
@@ -106,7 +114,7 @@
                 Palavra da Salvação. — Glória a vós, Senhor.
               </p>
 
-              <Button type="button" variant="outline" size="sm" class="rounded-full font-semibold cursor-pointer" v-if="isLongGospel" :aria-expanded="isExpanded" @click="isExpanded = !isExpanded">
+              <Button type="button" variant="outline" size="sm" class="rounded-full font-semibold cursor-pointer" v-if="isGospelTruncated" :aria-expanded="isExpanded" @click="isExpanded = !isExpanded">
                 <span>{{ isExpanded ? 'Recolher Evangelho' : 'Continuar lendo' }}</span>
                 <ChevronDown class="w-4 h-4 transition-transform duration-200" :class="isExpanded ? 'rotate-180' : ''" />
               </Button>
@@ -119,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, ref } from 'vue';
+  import { computed, onMounted, ref, watch } from 'vue';
   import { BookOpen, CalendarDays, ChevronDown, Cross } from '@lucide/vue';
   import { Badge } from '@/components/ui/badge';
   import { Button } from '@/components/ui/button';
@@ -148,20 +156,107 @@
     payload: DailyLiturgyData;
   }
 
+  interface TextSegment {
+    text: string;
+    isVerse: boolean;
+  }
+
   const LITURGY_API_URL = 'https://liturgia.up.railway.app/v2/';
   const CACHE_KEY = 'sf-daily-liturgy-v2';
-  const GOSPEL_COLLAPSE_THRESHOLD = 380;
+  const VERSE_PATTERN = /(^|[\s\n])(\d{1,3})(?![ªº])(?=[\p{L}"“'‘(])/gu;
 
   const isLoading = ref( true );
   const liturgy = ref<DailyLiturgyData | null>( null );
   const isExpanded = ref( false );
+  const isGospelTruncated = ref( false );
+  const gospelTextRef = ref<HTMLElement | null>( null );
 
   const firstReading = computed( () => liturgy.value?.leituras.primeiraLeitura?.[ 0 ] ?? null );
   const secondReading = computed( () => liturgy.value?.leituras.segundaLeitura?.[ 0 ] ?? null );
   const psalm = computed( () => liturgy.value?.leituras.salmo?.[ 0 ] ?? null );
   const gospel = computed( () => liturgy.value?.leituras.evangelho?.[ 0 ] ?? null );
 
-  const isLongGospel = computed( () => ( gospel.value?.texto.length ?? 0 ) > GOSPEL_COLLAPSE_THRESHOLD );
+  const gospelSegments = computed<TextSegment[]>( () => {
+    const rawText = gospel.value?.texto;
+    if ( !rawText ) {
+      return [];
+    }
+
+    const segments: TextSegment[] = [];
+    let lastIndex = 0;
+
+    for ( const match of rawText.matchAll( VERSE_PATTERN ) ) {
+      const fullMatchIndex = match.index ?? 0;
+      const prefix = match[ 1 ] ?? '';
+      const verseNumber = match[ 2 ] ?? '';
+      const verseStart = fullMatchIndex + prefix.length;
+
+      if ( verseStart > lastIndex ) {
+        segments.push( {
+          text: rawText.slice( lastIndex, verseStart ),
+          isVerse: false
+        } );
+      }
+
+      segments.push( {
+        text: verseNumber,
+        isVerse: true
+      } );
+
+      lastIndex = verseStart + verseNumber.length;
+    }
+
+    if ( lastIndex < rawText.length ) {
+      segments.push( {
+        text: rawText.slice( lastIndex ),
+        isVerse: false
+      } );
+    }
+
+    return segments;
+  } );
+
+  const updateGospelTruncation = () => {
+    const el = gospelTextRef.value;
+    if ( !el ) {
+      isGospelTruncated.value = false;
+      return;
+    }
+
+    if ( isExpanded.value ) {
+      const lineHeight = parseFloat( getComputedStyle( el ).lineHeight );
+      if ( !Number.isNaN( lineHeight ) && el.scrollHeight <= lineHeight * 6 + 2 ) {
+        isGospelTruncated.value = false;
+        isExpanded.value = false;
+        return;
+      }
+
+      isGospelTruncated.value = true;
+      return;
+    }
+
+    isGospelTruncated.value = el.scrollHeight > el.clientHeight + 1;
+  };
+
+  watch(
+    gospelTextRef,
+    ( el, _prev, onCleanup ) => {
+      if ( !el ) {
+        return;
+      }
+
+      updateGospelTruncation();
+
+      if ( typeof ResizeObserver !== 'undefined' ) {
+        const observer = new ResizeObserver( updateGospelTruncation );
+        observer.observe( el );
+        onCleanup( () => observer.disconnect() );
+      }
+
+      document.fonts?.ready.then( updateGospelTruncation );
+    },
+    { flush: 'post' }
+  );
 
   const formattedDate = computed( () => {
     const rawDate = liturgy.value?.data;
