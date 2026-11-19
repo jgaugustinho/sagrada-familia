@@ -1,12 +1,9 @@
 <template>
-  <div class="flex flex-col gap-10 sm:gap-12 pt-6 pb-12">
+  <div class="flex flex-col">
     <h1 class="sr-only">Sagrada Família — Artigos Religiosos</h1>
 
-    <div class="flex flex-col gap-4">
-      <HeroSlider />
-      <TrustBar />
-    </div>
-
+    <HeroSlider />
+    <TrustBar />
     <BestSellersSection />
     <CategoryExploreSection />
     <SeasonalShowcaseSection />

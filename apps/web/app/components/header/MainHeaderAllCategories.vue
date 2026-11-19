@@ -18,7 +18,7 @@
                No :key here on purpose: keeping a single persistent element avoids two panels
                coexisting while switching categories (which caused a visible flash). -->
           <Transition name="all-content">
-            <div class="all-content flex-1 min-w-[640px] p-6 lg:p-8" v-if="activeItem && activeItem.groups.length > 0">
+            <div class="all-content flex flex-col flex-1 min-w-[640px] p-6 lg:p-8" v-if="activeItem && activeItem.groups.length > 0">
               <MainHeaderCategoryPanel :category="activeItem" @close="emit( 'close' )" />
             </div>
           </Transition>

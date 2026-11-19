@@ -1,27 +1,17 @@
 <template>
-  <section class="container mx-auto px-4" aria-labelledby="best-sellers-heading">
-    <div class="flex items-end justify-between gap-4 mb-6 sm:mb-8">
-      <div>
-        <span class="block text-xs font-semibold uppercase tracking-wider text-primary mb-1">
-          Campeões de Venda
-        </span>
-        <h2 id="best-sellers-heading" class="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-foreground">
-          Os Mais Amados
-        </h2>
+  <section class="w-full bg-background surface-linen py-14 sm:py-20" aria-labelledby="best-sellers-heading">
+    <div class="relative z-10 container mx-auto px-4">
+      <SectionHeader heading-id="best-sellers-heading" eyebrow="Campeões de Venda" title="Os Mais Amados" action-label="Ver todos" action-to="/c/mais-vendidos" v-reveal />
+
+      <div v-reveal="{ delay: 100 }">
+        <ProductCarousel aria-label="Produtos mais amados" show-rank :products="bestSellerProducts" />
       </div>
-
-      <NuxtLink class="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80 transition-colors shrink-0" to="/c/mais-vendidos">
-        <span>Ver todos</span>
-        <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
-      </NuxtLink>
     </div>
-
-    <ProductCarousel aria-label="Produtos mais amados" :products="bestSellerProducts" />
   </section>
 </template>
 
 <script setup lang="ts">
-  import { ArrowRight } from '@lucide/vue';
+  import SectionHeader from '@/components/home/SectionHeader.vue';
   import ProductCarousel from '@/components/product/ProductCarousel.vue';
   import { bestSellerProducts } from '@/data/products';
 </script>

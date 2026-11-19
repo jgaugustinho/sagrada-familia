@@ -12,41 +12,50 @@ export default <Partial<Config>>{
       }
     },
     extend: {
+      fontFamily: {
+        sans: [ '"DM Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif' ],
+        serif: [ '"Cormorant Garamond"', 'Georgia', 'serif' ]
+      },
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
+        'border': 'hsl(var(--border))',
+        'input': 'hsl(var(--input))',
+        'ring': 'hsl(var(--ring))',
+        'background': 'hsl(var(--background))',
+        'foreground': 'hsl(var(--foreground))',
+        'surface': 'hsl(var(--surface))',
+        'surface-warm': 'hsl(var(--surface-warm))',
+        'gold-dark': 'hsl(var(--gold-dark))',
+        'gold-light': 'hsl(var(--gold-light))',
+        'gold-bright': 'hsl(var(--gold-bright))',
+        'primary': {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
         },
-        secondary: {
+        'secondary': {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))'
         },
-        destructive: {
+        'destructive': {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))'
         },
-        muted: {
+        'muted': {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))'
         },
-        accent: {
+        'accent': {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))'
         },
-        popover: {
+        'popover': {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))'
         },
-        card: {
+        'card': {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
-        sidebar: {
+        'sidebar': {
           'DEFAULT': 'hsl(var(--sidebar-background))',
           'foreground': 'hsl(var(--sidebar-foreground))',
           'primary': 'hsl(var(--sidebar-primary))',
@@ -56,10 +65,16 @@ export default <Partial<Config>>{
           'border': 'hsl(var(--sidebar-border))',
           'ring': 'hsl(var(--sidebar-ring))'
         },
-        dark: {
+        'dark': {
           DEFAULT: 'hsl(var(--dark))',
           foreground: 'hsl(var(--dark-foreground))'
-        }
+        },
+        'dark-deep': 'hsl(var(--dark-deep))'
+      },
+      boxShadow: {
+        'warm-sm': '0 2px 10px -2px hsl(38 36% 18% / 0.06)',
+        'warm-md': '0 12px 30px -8px hsl(38 36% 18% / 0.10)',
+        'warm-lg': '0 22px 48px -12px hsl(38 36% 18% / 0.14)'
       },
       borderRadius: {
         xl: 'calc(var(--radius) + 4px)',
@@ -123,6 +138,17 @@ export default <Partial<Config>>{
         'sheet-out-bottom': {
           from: { transform: 'translateY(0)' },
           to: { transform: 'translateY(100%)' }
+        },
+        'cart-pop': {
+          '0%': { transform: 'scale(1)' },
+          '40%': { transform: 'scale(1.28)' },
+          '70%': { transform: 'scale(0.94)' },
+          '100%': { transform: 'scale(1)' }
+        },
+        'hotspot-pulse': {
+          '0%': { transform: 'scale(1)', opacity: '0.65' },
+          '70%': { transform: 'scale(1.9)', opacity: '0' },
+          '100%': { transform: 'scale(1.9)', opacity: '0' }
         }
       },
       animation: {
@@ -139,7 +165,9 @@ export default <Partial<Config>>{
         'sheet-in-top': 'sheet-in-top 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
         'sheet-out-top': 'sheet-out-top 0.2s ease-in',
         'sheet-in-bottom': 'sheet-in-bottom 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
-        'sheet-out-bottom': 'sheet-out-bottom 0.2s ease-in'
+        'sheet-out-bottom': 'sheet-out-bottom 0.2s ease-in',
+        'cart-pop': 'cart-pop 0.42s cubic-bezier(0.22, 1, 0.36, 1)',
+        'hotspot-pulse': 'hotspot-pulse 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite'
       }
     }
   }

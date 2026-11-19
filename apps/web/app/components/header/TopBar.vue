@@ -1,20 +1,23 @@
 <template>
-  <aside class="bg-dark text-dark-foreground text-sm border-b border-dark/20 overflow-hidden" aria-label="Informações e avisos promocionais">
+  <aside class="bg-gold-dark text-background text-xs tracking-wide border-b border-gold-bright/25 overflow-hidden antialiased" aria-label="Informações e avisos promocionais">
     <div class="container mx-auto px-4">
       <!-- Desktop: Displays all items side-by-side -->
-      <div class="hidden md:flex items-center justify-between py-2 text-center font-medium">
-        <div class="flex items-center gap-2" v-for="( item, index ) in notices" :key="index">
-          <component class="w-3.5 h-3.5 text-primary shrink-0" :is="item.icon" />
-          <span v-html="item.text" />
-        </div>
+      <div class="hidden md:flex items-center justify-center gap-6 lg:gap-10 py-2 text-center font-medium">
+        <template v-for="( item, index ) in notices" :key="index">
+          <span class="w-px h-3.5 bg-background/25 shrink-0" aria-hidden="true" v-if="index > 0" />
+          <div class="flex items-center gap-2">
+            <component class="w-3.5 h-3.5 text-background/90 shrink-0" :is="item.icon" />
+            <span>{{ item.prefix }}<strong class="font-semibold">{{ item.strong }}</strong>{{ item.suffix }}</span>
+          </div>
+        </template>
       </div>
 
       <!-- Mobile: Carousel cycling one active notice at a time -->
       <div class="md:hidden relative h-9 flex items-center justify-center font-medium">
         <Transition name="slide" mode="out-in">
           <div class="flex items-center justify-center gap-2 px-2 text-center" :key="currentIndex">
-            <component class="w-3.5 h-3.5 text-primary shrink-0" :is="notices[ currentIndex ]?.icon" />
-            <span v-html="notices[ currentIndex ]?.text" />
+            <component class="w-3.5 h-3.5 text-background/90 shrink-0" :is="notices[ currentIndex ]?.icon" />
+            <span>{{ notices[ currentIndex ]?.prefix }}<strong class="font-semibold">{{ notices[ currentIndex ]?.strong }}</strong>{{ notices[ currentIndex ]?.suffix }}</span>
           </div>
         </Transition>
       </div>
@@ -28,21 +31,27 @@
 
   interface NoticeItem {
     icon: Component;
-    text: string;
+    prefix?: string;
+    strong: string;
+    suffix?: string;
   }
 
   const notices: NoticeItem[] = [
     {
       icon: CreditCard,
-      text: 'Até <strong>10x sem juros</strong> nos cartões'
+      prefix: 'Até ',
+      strong: '10x sem juros',
+      suffix: ' nos cartões'
     },
     {
       icon: QrCode,
-      text: '<strong>5% OFF</strong> no Pix'
+      strong: '5% OFF',
+      suffix: ' no Pix'
     },
     {
       icon: Truck,
-      text: '<strong>Frete Grátis</strong> acima de R$250'
+      strong: 'Frete Grátis',
+      suffix: ' acima de R$250'
     }
   ];
 

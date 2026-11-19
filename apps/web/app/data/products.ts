@@ -22,12 +22,18 @@ export interface SeasonalCampaign {
   products: Product[];
 }
 
+export interface ScenarioHotspot {
+  x: number;
+  y: number;
+}
+
 export interface DevotionScenario {
   id: string;
   eyebrow: string;
   title: string;
   imageUrl: string;
   imageAlt: string;
+  hotspots?: ScenarioHotspot[];
   products: Product[];
 }
 
@@ -535,6 +541,11 @@ export const devotionScenarios: DevotionScenario[] = [
     title: 'Oratório da Sagrada Família',
     imageUrl: 'https://images.unsplash.com/photo-1548625361-58a9b86aa83b?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Oratório familiar com imagem da Sagrada Família, Bíblia e vela aromática',
+    hotspots: [
+      { x: 46, y: 42 },
+      { x: 26, y: 68 },
+      { x: 70, y: 66 }
+    ],
     products: [
       {
         id: 'prod-cenario-imagem-sagrada-familia-25cm',
@@ -575,6 +586,11 @@ export const devotionScenarios: DevotionScenario[] = [
     title: 'Devoção a São Bento',
     imageUrl: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Conjunto devocional de São Bento com crucifixo, escapulário de porta e terço',
+    hotspots: [
+      { x: 50, y: 34 },
+      { x: 28, y: 58 },
+      { x: 68, y: 72 }
+    ],
     products: [
       {
         id: 'prod-cenario-crucifixo-sao-bento-30cm',

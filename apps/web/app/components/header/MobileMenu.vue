@@ -24,8 +24,12 @@
             <User class="w-5 h-5" />
           </div>
           <div class="min-w-0 flex-1">
-            <p class="text-sm font-semibold text-foreground leading-tight">Minha Conta</p>
-            <p class="text-xs text-muted-foreground mt-0.5 truncate">Entre ou acompanhe seus pedidos</p>
+            <p class="text-sm font-semibold text-foreground leading-tight">
+              {{ isLoggedIn ? `Olá, ${ firstName }` : 'Entre ou cadastre-se' }}
+            </p>
+            <p class="text-xs text-muted-foreground mt-0.5 truncate">
+              {{ isLoggedIn ? 'Minha conta e pedidos' : 'Entre ou acompanhe seus pedidos' }}
+            </p>
           </div>
           <ChevronRight class="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all ml-auto shrink-0" />
         </NuxtLink>
@@ -133,6 +137,7 @@
     SheetTrigger
   } from '@/components/ui/sheet';
   import { allCategoriesMenu, categoryPath } from '@/data/main-menu';
+  import { useAuthPreview } from '@/composables/useAuthPreview';
 
   interface InstitutionalLink {
     label: string;
@@ -149,6 +154,7 @@
   ];
 
   const route = useRoute();
+  const { isLoggedIn, firstName } = useAuthPreview();
 
   const isOpen = ref( false );
   const activeCategory = ref<string | undefined>( undefined );
