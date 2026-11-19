@@ -11,7 +11,7 @@
       <SheetHeader class="p-4 border-b border-border bg-card space-y-3 text-left shrink-0">
         <div class="flex items-center pr-8">
           <NuxtLink to="/" class="inline-flex items-center" aria-label="Página Inicial - Sagrada Família" @click="closeMenu">
-            <img src="/images/logo.png" alt="Sagrada Família - Artigos Religiosos" class="h-10 w-auto object-contain" />
+            <img src="/images/horizontal_2D_logo.png" alt="Sagrada Família - Artigos Religiosos" class="h-10 w-auto object-contain" />
           </NuxtLink>
           <SheetTitle class="sr-only">Menu de navegação</SheetTitle>
           <SheetDescription class="sr-only">

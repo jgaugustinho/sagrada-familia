@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-40 bg-background border-b border-border">
-    <div class="container mx-auto px-4 py-3 md:py-4 grid grid-cols-[1fr_auto_1fr] md:flex items-center justify-between gap-y-3 md:gap-8">
+    <div class="container mx-auto px-4 py-3 md:py-2 grid grid-cols-[1fr_auto_1fr] md:flex items-center justify-between gap-y-3 md:gap-8">
       <!-- Mobile Left: Menu button -->
       <div class="flex items-center justify-start md:hidden">
         <MobileMenu />
@@ -8,7 +8,7 @@
 
       <!-- Logo: Centered on mobile, Left on desktop -->
       <NuxtLink to="/" class="flex items-center justify-center md:justify-start shrink-0" aria-label="Página Inicial - Sagrada Família">
-        <img src="/images/logo.png" alt="Sagrada Família - Artigos Religiosos" class="h-12 md:h-16 w-auto object-contain" />
+        <img src="/images/horizontal_2D_logo.png" alt="Sagrada Família - Artigos Religiosos" class="h-12 md:h-16 w-auto object-contain" />
       </NuxtLink>
 
       <!-- Search Input: Second row full-width on mobile, Centered flex-1 on desktop -->
