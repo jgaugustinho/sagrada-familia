@@ -78,11 +78,6 @@
   import ProductCarousel from '@/components/product/ProductCarousel.vue';
   import { activeSeasonalCampaign } from '@/data/products';
 
-  interface CountdownUnit {
-    label: string;
-    value: string;
-  }
-
   const campaign = activeSeasonalCampaign;
 
   const getRemainingMs = (): number => {
@@ -101,7 +96,7 @@
 
   const padUnit = ( value: number ): string => String( value ).padStart( 2, '0' );
 
-  const countdownUnits = computed<CountdownUnit[]>( () => {
+  const countdownUnits = computed( () => {
     const totalSeconds = Math.floor( remainingMs.value / 1000 );
     const days = Math.floor( totalSeconds / 86400 );
     const hours = Math.floor( ( totalSeconds % 86400 ) / 3600 );

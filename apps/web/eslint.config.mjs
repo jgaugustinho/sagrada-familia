@@ -12,6 +12,7 @@ export default withNuxt(
       '@stylistic/array-bracket-spacing': [ 'error', 'always' ],
       '@stylistic/computed-property-spacing': [ 'error', 'always' ],
       '@stylistic/object-curly-spacing': [ 'error', 'always' ],
+      '@stylistic/object-curly-newline': [ 'error', { ImportDeclaration: 'never' } ],
       '@stylistic/template-curly-spacing': [ 'error', 'always' ],
       '@stylistic/arrow-parens': [ 'error', 'always' ],
       '@stylistic/brace-style': [ 'error', '1tbs', { allowSingleLine: true } ],

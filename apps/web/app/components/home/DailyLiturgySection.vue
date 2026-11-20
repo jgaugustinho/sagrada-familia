@@ -163,24 +163,12 @@
     };
   }
 
-  interface CachedDailyLiturgy {
-    dateKey: string;
-    payload: DailyLiturgyData;
-  }
-
   interface TextSegment {
     text: string;
     isVerse: boolean;
   }
 
   type ReadingTabKey = 'evangelho' | 'primeiraLeitura' | 'salmo' | 'segundaLeitura';
-
-  interface ReadingTabItem {
-    key: ReadingTabKey;
-    label: string;
-    fullTitle: string;
-    reading: LiturgyReading;
-  }
 
   const LITURGY_API_URL = 'https://liturgia.up.railway.app/v2/';
   const CACHE_KEY = 'sf-daily-liturgy-v2';
@@ -205,8 +193,8 @@
   const psalm = computed( () => liturgy.value?.leituras.salmo?.[ 0 ] ?? null );
   const gospel = computed( () => liturgy.value?.leituras.evangelho?.[ 0 ] ?? null );
 
-  const availableTabs = computed<ReadingTabItem[]>( () => {
-    const tabs: ReadingTabItem[] = [];
+  const availableTabs = computed( () => {
+    const tabs: Array<{ key: ReadingTabKey; label: string; fullTitle: string; reading: LiturgyReading }> = [];
 
     if ( firstReading.value ) {
       tabs.push( {
@@ -478,7 +466,7 @@
         return null;
       }
 
-      const cached = JSON.parse( raw ) as CachedDailyLiturgy;
+      const cached = JSON.parse( raw ) as { dateKey: string; payload: DailyLiturgyData };
       if ( cached.dateKey === todayKey && cached.payload?.leituras?.evangelho?.[ 0 ]?.texto ) {
         return cached.payload;
       }
@@ -491,8 +479,7 @@
 
   const saveCachedLiturgy = ( dateKey: string, payload: DailyLiturgyData ) => {
     try {
-      const entry: CachedDailyLiturgy = { dateKey, payload };
-      localStorage.setItem( CACHE_KEY, JSON.stringify( entry ) );
+      localStorage.setItem( CACHE_KEY, JSON.stringify( { dateKey, payload } ) );
     } catch {
       // Ignore storage quota or private mode failures
     }

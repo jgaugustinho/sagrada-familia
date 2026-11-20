@@ -11,9 +11,9 @@
           <!-- Left highlight: Todas as categorias -->
           <div class="flex items-center pr-6 lg:pr-8 border-r border-gold-light/35 shrink-0" @mouseenter="openAll" @focusin="openAll">
             <button type="button" class="group relative flex flex-col items-center justify-center gap-1.5 px-2.5 py-1 rounded-lg hover:bg-background/50 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40" aria-haspopup="true" :aria-expanded="isAllOpen">
-              <component class="category-icon w-6 h-6 stroke-[2] text-gold-dark transition-colors duration-200 group-hover:text-primary" :is="allCategories.icon" />
+              <AlignLeft class="category-icon w-6 h-6 stroke-[2] text-gold-dark transition-colors duration-200 group-hover:text-primary" />
               <span class="text-xs lg:text-[13px] font-bold tracking-wide whitespace-nowrap text-gold-dark transition-colors duration-200 group-hover:text-primary">
-                {{ allCategories.label }}
+                Todas as categorias
               </span>
               <span class="absolute -bottom-2 left-2 right-2 h-0.5 rounded-full bg-primary origin-center transition-transform duration-300" :class="isAllOpen ? 'scale-x-100' : 'scale-x-0'" />
             </button>
@@ -58,11 +58,6 @@
   import MainHeaderCategoryPanel from '@/components/header/MainHeaderCategoryPanel.vue';
 
   const route = useRoute();
-
-  const allCategories = {
-    label: 'Todas as categorias',
-    icon: AlignLeft
-  };
 
   const CLOSE_DELAY_MS = 150;
 

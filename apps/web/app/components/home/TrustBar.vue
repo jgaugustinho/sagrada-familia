@@ -25,16 +25,9 @@
 </template>
 
 <script setup lang="ts">
-  import type { Component } from 'vue';
   import { Headset, PackageCheck, ShieldCheck, Truck } from '@lucide/vue';
 
-  interface TrustItem {
-    icon: Component;
-    title: string;
-    subtitle: string;
-  }
-
-  const trustItems: TrustItem[] = [
+  const trustItems = [
     {
       icon: PackageCheck,
       title: 'Embalagem Anti-Impacto',

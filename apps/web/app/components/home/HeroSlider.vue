@@ -65,25 +65,7 @@
   import { Button } from '@/components/ui/button';
   import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 
-  interface HeroSlideImages {
-    mobile: string;
-    desktop: string;
-    wide: string;
-  }
-
-  interface HeroSlide {
-    slug: string;
-    label: string;
-    badge: string;
-    title: string;
-    description: string;
-    ctaLabel: string;
-    to: string;
-    images: HeroSlideImages;
-    imageAlt: string;
-  }
-
-  const slides: HeroSlide[] = [
+  const slides = [
     {
       slug: 'natal-2026',
       label: 'Natal 2026',

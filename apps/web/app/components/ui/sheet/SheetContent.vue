@@ -18,13 +18,11 @@
   import type { SheetVariants } from '.';
   import { computed } from 'vue';
   import { X } from '@lucide/vue';
-  import {
-    DialogClose,
-    DialogContent,
-    DialogOverlay,
-    DialogPortal,
-    useForwardPropsEmits
-  } from 'reka-ui';
+  import { DialogClose,
+           DialogContent,
+           DialogOverlay,
+           DialogPortal,
+           useForwardPropsEmits } from 'reka-ui';
   import { cn } from '@/lib/utils';
   import { sheetVariants } from '.';
 

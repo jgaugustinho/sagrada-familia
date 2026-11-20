@@ -42,14 +42,7 @@
   import { devocionais } from '@/data/main-menu';
   import { DUMMY_PRIMARY_IMAGE } from '@/data/products';
 
-  interface ExploreDevotion {
-    label: string;
-    slug: string;
-    to: string;
-    imageUrl: string;
-  }
-
-  const devotions: ExploreDevotion[] = devocionais.groups.flatMap( ( group ) =>
+  const devotions = devocionais.groups.flatMap( ( group ) =>
     group.items.map( ( item ) => ( {
       label: item.label,
       slug: item.slug,

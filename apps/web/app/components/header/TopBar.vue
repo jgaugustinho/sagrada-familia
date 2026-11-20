@@ -26,17 +26,10 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref, type Component } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { CreditCard, QrCode, Truck } from '@lucide/vue';
 
-  interface NoticeItem {
-    icon: Component;
-    prefix?: string;
-    strong: string;
-    suffix?: string;
-  }
-
-  const notices: NoticeItem[] = [
+  const notices = [
     {
       icon: CreditCard,
       prefix: 'Até ',

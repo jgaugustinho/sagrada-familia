@@ -39,14 +39,7 @@
   import { categoryPath, mainMenu } from '@/data/main-menu';
   import { DUMMY_PRIMARY_IMAGE } from '@/data/products';
 
-  interface ExploreCategory {
-    label: string;
-    slug: string;
-    to: string;
-    imageUrl: string;
-  }
-
-  const categories: ExploreCategory[] = mainMenu
+  const categories = mainMenu
     .filter( ( item ) => item.slug !== 'promocoes' )
     .map( ( category ) => ( {
       label: category.label,

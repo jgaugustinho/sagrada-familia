@@ -109,43 +109,31 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref, watch, type Component } from 'vue';
-  import {
-    ArrowRight,
-    ChevronRight,
-    Info,
-    Mail,
-    Menu,
-    RefreshCw,
-    ShieldCheck,
-    Truck,
-    User
-  } from '@lucide/vue';
-  import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger
-  } from '@/components/ui/accordion';
+  import { onMounted, onUnmounted, ref, watch } from 'vue';
+  import { ArrowRight,
+           ChevronRight,
+           Info,
+           Mail,
+           Menu,
+           RefreshCw,
+           ShieldCheck,
+           Truck,
+           User } from '@lucide/vue';
+  import { Accordion,
+           AccordionContent,
+           AccordionItem,
+           AccordionTrigger } from '@/components/ui/accordion';
   import { Separator } from '@/components/ui/separator';
-  import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger
-  } from '@/components/ui/sheet';
+  import { Sheet,
+           SheetContent,
+           SheetDescription,
+           SheetHeader,
+           SheetTitle,
+           SheetTrigger } from '@/components/ui/sheet';
   import { allCategoriesMenu, categoryPath } from '@/data/main-menu';
   import { useAuthPreview } from '@/composables/useAuthPreview';
 
-  interface InstitutionalLink {
-    label: string;
-    to: string;
-    icon: Component;
-  }
-
-  const institutionalLinks: InstitutionalLink[] = [
+  const institutionalLinks = [
     { label: 'Sobre Nós', to: '/sobre-nos', icon: Info },
     { label: 'Contato', to: '/contato', icon: Mail },
     { label: 'Política de Postagem e Entrega', to: '/politica-de-postagem-e-entrega', icon: Truck },
