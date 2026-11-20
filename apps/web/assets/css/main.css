@@ -116,6 +116,16 @@
   body {
     @apply bg-background text-foreground font-sans selection:bg-primary/20 selection:text-foreground;
   }
+
+  .bg-dark::selection,
+  .bg-dark *::selection,
+  .bg-dark-deep::selection,
+  .bg-dark-deep *::selection,
+  .bg-gold-dark::selection,
+  .bg-gold-dark *::selection {
+    background-color: hsl(var(--gold-bright) / 0.35);
+    color: hsl(var(--background));
+  }
 }
 
 @layer components {
