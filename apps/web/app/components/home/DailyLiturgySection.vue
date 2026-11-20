@@ -1,5 +1,5 @@
 <template>
-  <section class="relative overflow-hidden w-full bg-card surface-linen text-foreground border-t border-gold-light/30 py-14 sm:py-20" aria-labelledby="daily-liturgy-heading" v-if="isLoading || liturgy">
+  <section class="relative overflow-hidden w-full bg-background surface-linen text-foreground border-t border-gold-light/30 py-14 sm:py-20" aria-labelledby="daily-liturgy-heading" v-if="isLoading || liturgy">
     <svg class="pointer-events-none select-none absolute -bottom-8 -right-4 sm:-bottom-10 sm:right-4 lg:right-10 z-[1] w-44 h-56 sm:w-56 sm:h-72 lg:w-64 lg:h-80 text-primary opacity-[0.11]" viewBox="0 0 140 180" fill="none" aria-hidden="true">
       <path d="M 60 12 H 80 V 48 H 122 V 68 H 80 V 168 H 60 V 68 H 18 V 48 H 60 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" />
       <path d="M 64 16 H 76 V 52 H 118 V 64 H 76 V 164 H 64 V 64 H 22 V 52 H 64 Z" stroke="currentColor" stroke-width="0.95" stroke-opacity="0.75" stroke-linejoin="miter" />
@@ -170,6 +170,13 @@
 
   type ReadingTabKey = 'evangelho' | 'primeiraLeitura' | 'salmo' | 'segundaLeitura';
 
+  interface ReadingTabItem {
+    key: ReadingTabKey;
+    label: string;
+    fullTitle: string;
+    reading: LiturgyReading;
+  }
+
   const LITURGY_API_URL = 'https://liturgia.up.railway.app/v2/';
   const CACHE_KEY = 'sf-daily-liturgy-v2';
   const VERSE_PATTERN = /(^|[\s\n])(\d{1,3})(?![ªº])(?=[\p{L}"“'‘(])/gu;
@@ -193,8 +200,8 @@
   const psalm = computed( () => liturgy.value?.leituras.salmo?.[ 0 ] ?? null );
   const gospel = computed( () => liturgy.value?.leituras.evangelho?.[ 0 ] ?? null );
 
-  const availableTabs = computed( () => {
-    const tabs: Array<{ key: ReadingTabKey; label: string; fullTitle: string; reading: LiturgyReading }> = [];
+  const availableTabs = computed<ReadingTabItem[]>( () => {
+    const tabs: ReadingTabItem[] = [];
 
     if ( firstReading.value ) {
       tabs.push( {

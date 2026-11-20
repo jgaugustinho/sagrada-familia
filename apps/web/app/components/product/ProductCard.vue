@@ -1,6 +1,6 @@
 <template>
   <article class="group relative flex flex-col h-full rounded-2xl border p-2 sm:p-2.5 transition-all duration-300 ease-out motion-reduce:transition-none hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:shadow-warm-md" :class="surface === 'elevated' ? 'bg-card/90 border-border/60 shadow-warm-sm hover:bg-card hover:border-gold-light/60' : 'bg-transparent border-transparent hover:bg-card hover:border-border/80'">
-    <NuxtLink class="relative block aspect-[4/5] w-full rounded-xl overflow-hidden bg-surface/70 ring-1 ring-inset ring-dark/5" :to="`/p/${ product.slug }`">
+    <NuxtLink class="relative block aspect-square w-full rounded-xl overflow-hidden bg-surface/70 ring-1 ring-inset ring-dark/5" :to="`/p/${ product.slug }`">
       <div class="absolute top-2.5 left-2.5 z-10 flex flex-wrap items-center gap-1.5" v-if="product.isNew || discountPercentage !== null">
         <Badge class="rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide shadow-warm-sm bg-dark/90 text-background backdrop-blur-sm hover:bg-dark/90" v-if="product.isNew">
           Novo

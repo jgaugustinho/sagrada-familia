@@ -1,8 +1,8 @@
 <template>
-  <footer class="relative overflow-hidden bg-card text-background antialiased selection:bg-gold-bright/35 selection:text-background" aria-label="Rodapé institucional da Sagrada Família">
+  <footer class="relative overflow-hidden bg-background text-background antialiased selection:bg-gold-bright/35 selection:text-background" aria-label="Rodapé institucional da Sagrada Família">
     <!-- Top textured linen bridge extending DailyLiturgySection seamlessly behind the floating card -->
     <div class="pointer-events-none absolute inset-x-0 top-0 h-24 sm:h-28 overflow-hidden border-b border-gold-light/25" aria-hidden="true">
-      <div class="w-full h-full bg-card surface-linen" />
+      <div class="w-full h-full bg-background surface-linen" />
     </div>
     <!-- Lower dark backdrop starting below the linen bridge to prevent top subpixel seams -->
     <div class="pointer-events-none absolute inset-x-0 top-24 sm:top-28 bottom-0 bg-dark-deep" aria-hidden="true" />
@@ -34,8 +34,7 @@
                     <path :d="WHATSAPP_BUBBLE_PATH" />
                     <path fill="currentColor" stroke="none" :d="WHATSAPP_PHONE_PATH" />
                   </svg>
-                  <span>Falar pelo WhatsApp</span>
-                  <ArrowUpRight class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+                  <span>Falar no WhatsApp</span>
                 </a>
 
                 <NuxtLink to="/contato" class="inline-flex items-center gap-1.5 rounded-full border border-gold-light/35 px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-semibold text-background/90 hover:border-gold-bright hover:text-gold-bright transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-bright">
@@ -111,8 +110,8 @@
 
           <ul class="space-y-2">
             <li v-for="item in col.items" :key="item.label">
-              <NuxtLink class="link-editorial footer-link inline-flex items-center gap-2 text-sm text-background/75 hover:text-gold-bright transition-colors" :to="item.to">
-                <span>{{ item.label }}</span>
+              <NuxtLink class="group/link inline-flex items-center gap-2 text-sm text-background/75 hover:text-gold-bright transition-colors" :to="item.to">
+                <span class="link-editorial footer-link">{{ item.label }}</span>
                 <span class="rounded-full bg-gold-bright/15 border border-gold-bright/30 px-1.5 py-0.5 text-[10px] font-semibold text-gold-bright leading-none" v-if="item.badge">
                   {{ item.badge }}
                 </span>
@@ -235,7 +234,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ArrowUpRight, ChevronDown, Clock, Mail, MapPin, PackageCheck, QrCode, Truck } from '@lucide/vue';
+  import { ChevronDown, Clock, Mail, MapPin, PackageCheck, QrCode, Truck } from '@lucide/vue';
   import AbsoluteFooter from '@/components/footer/AbsoluteFooter.vue';
   import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
@@ -322,6 +321,11 @@
 
   .footer-link::after {
     background-color: hsl(var(--gold-bright));
+  }
+
+  .group\/link:hover .footer-link::after,
+  .group\/link:focus-visible .footer-link::after {
+    transform: scaleX(1);
   }
 
   .wordmark-fade {

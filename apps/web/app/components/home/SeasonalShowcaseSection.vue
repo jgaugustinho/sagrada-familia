@@ -3,7 +3,7 @@
     <div class="pointer-events-none absolute -top-28 -right-28 w-96 h-96 rounded-full bg-background/45 blur-3xl" aria-hidden="true" />
     <div class="pointer-events-none absolute -bottom-28 -left-28 w-80 h-80 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
 
-    <svg class="star-ornament-mask pointer-events-none select-none absolute -top-10 -right-8 sm:-top-12 sm:right-2 lg:right-8 z-[1] w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] lg:w-[400px] lg:h-[400px] text-gold-dark opacity-[0.18]" viewBox="0 0 360 360" fill="none" aria-hidden="true">
+    <svg class="star-ornament-mask pointer-events-none select-none absolute -top-10 -right-8 sm:-top-12 sm:right-2 lg:right-8 z-[1] w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] lg:w-[400px] lg:h-[400px] text-gold-dark opacity-5" viewBox="0 0 360 360" fill="none" aria-hidden="true">
       <circle cx="220" cy="138" r="22" stroke="currentColor" stroke-width="1.25" />
       <circle cx="220" cy="138" r="11" stroke="currentColor" stroke-width="1.1" stroke-opacity="0.85" />
       <circle cx="220" cy="138" r="56" stroke="currentColor" stroke-width="1" stroke-opacity="0.7" stroke-dasharray="2 5" />
@@ -32,7 +32,7 @@
           </span>
 
           <h2 id="seasonal-showcase-heading" class="font-serif text-3xl sm:text-4xl lg:text-[2.65rem] font-semibold tracking-tight leading-[1.1] text-foreground">
-            {{ campaign.title }}
+            <TreePine class="inline-block w-7 h-7 sm:w-9 sm:h-9 text-primary mr-2.5 -mt-1.5 shrink-0" aria-hidden="true" /><span>{{ campaign.title }}</span>
           </h2>
 
           <p class="mt-2 text-sm sm:text-base text-muted-foreground max-w-2xl leading-relaxed">
@@ -74,7 +74,7 @@
 
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted } from 'vue';
-  import { ArrowRight, Clock, Sparkles } from '@lucide/vue';
+  import { ArrowRight, Clock, Sparkles, TreePine } from '@lucide/vue';
   import ProductCarousel from '@/components/product/ProductCarousel.vue';
   import { activeSeasonalCampaign } from '@/data/products';
 
