@@ -39,14 +39,13 @@
 <script setup lang="ts">
   import SectionHeader from '@/components/home/SectionHeader.vue';
   import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-  import { devocionais } from '@/data/main-menu';
-  import { DUMMY_PRIMARY_IMAGE } from '@/data/products';
+  import { devotionCategory, DUMMY_PRIMARY_IMAGE } from '@/data/categories';
 
-  const devotions = devocionais.groups.flatMap( ( group ) =>
+  const devotions = devotionCategory.groups.flatMap( ( group ) =>
     group.items.map( ( item ) => ( {
       label: item.label,
       slug: item.slug,
-      to: `/c/${ devocionais.slug }/${ item.slug }`,
+      to: `/c/${ devotionCategory.slug }/${ item.slug }`,
       imageUrl: group.featured.imageUrl || DUMMY_PRIMARY_IMAGE
     } ) )
   );

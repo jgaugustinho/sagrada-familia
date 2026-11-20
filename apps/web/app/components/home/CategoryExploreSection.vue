@@ -36,17 +36,14 @@
 <script setup lang="ts">
   import SectionHeader from '@/components/home/SectionHeader.vue';
   import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-  import { categoryPath, mainMenu } from '@/data/main-menu';
-  import { DUMMY_PRIMARY_IMAGE } from '@/data/products';
+  import { catalogCategories, getCategoryMedia } from '@/data/categories';
 
-  const categories = mainMenu
-    .filter( ( item ) => item.slug !== 'promocoes' )
-    .map( ( category ) => ( {
-      label: category.label,
-      slug: category.slug,
-      to: categoryPath( category ),
-      imageUrl: category.groups[ 0 ]?.featured.imageUrl ?? DUMMY_PRIMARY_IMAGE
-    } ) );
+  const categories = catalogCategories.map( ( category ) => ( {
+    label: category.label,
+    slug: category.slug,
+    to: `/c/${ category.slug }`,
+    imageUrl: getCategoryMedia( category.slug ).imageUrl
+  } ) );
 
   const carouselOptions = {
     align: 'start' as const,

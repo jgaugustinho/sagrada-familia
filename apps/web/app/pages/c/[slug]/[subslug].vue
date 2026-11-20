@@ -1,12 +1,18 @@
 <template>
-  <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-4">Categoria: {{ route.params.slug }} / Subcategoria: {{ route.params.subslug }}</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-  </div>
+  <ProductCatalogPage :category-slug="categorySlug" :sub-category-slug="subCategorySlug" />
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue';
+  import ProductCatalogPage from '@/components/catalog/ProductCatalogPage.vue';
+  import { getCatalogContext } from '@/data/catalog';
+
   const route = useRoute();
+  const categorySlug = computed( () => String( route.params.slug ?? '' ) );
+  const subCategorySlug = computed( () => String( route.params.subslug ?? '' ) );
+  const pageTitle = computed( () => `${ getCatalogContext( categorySlug.value, subCategorySlug.value ).title } — Sagrada Família` );
+
+  useHead( {
+    title: pageTitle
+  } );
 </script>

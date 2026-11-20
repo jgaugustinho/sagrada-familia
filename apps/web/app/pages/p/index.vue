@@ -1,8 +1,11 @@
 <template>
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-4">Todos os produtos</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
-  </div>
+  <ProductCatalogPage category-slug="todos" />
 </template>
+
+<script setup lang="ts">
+  import ProductCatalogPage from '@/components/catalog/ProductCatalogPage.vue';
+
+  useHead( {
+    title: 'Todos os Produtos — Sagrada Família'
+  } );
+</script>
