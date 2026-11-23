@@ -112,11 +112,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .all-panel-enter-active,
-    .all-panel-leave-active,
-    .all-card,
-    .all-content-enter-active,
-    .all-content-leave-active {
+    .all-panel-enter-active, .all-panel-leave-active, .all-card, .all-content-enter-active, .all-content-leave-active {
       transition: none;
     }
   }

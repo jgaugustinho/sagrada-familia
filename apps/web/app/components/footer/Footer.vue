@@ -1,5 +1,5 @@
 <template>
-  <footer class="relative overflow-hidden bg-background text-background antialiased selection:bg-gold-bright/35 selection:text-background" aria-label="Rodapé institucional da Sagrada Família">
+  <footer class="relative overflow-hidden bg-background text-background antialiased surface-dark" aria-label="Rodapé institucional da Sagrada Família">
     <!-- Top textured linen bridge extending DailyLiturgySection seamlessly behind the floating card -->
     <div class="pointer-events-none absolute inset-x-0 top-0 h-24 sm:h-28 overflow-hidden border-b border-gold-light/25" aria-hidden="true">
       <div class="w-full h-full bg-background surface-linen" />
@@ -323,8 +323,7 @@
     background-color: hsl(var(--gold-bright));
   }
 
-  .group\/link:hover .footer-link::after,
-  .group\/link:focus-visible .footer-link::after {
+  .group\/link:hover .footer-link::after, .group\/link:focus-visible .footer-link::after {
     transform: scaleX(1);
   }
 

@@ -233,8 +233,7 @@
     animation: hero-progress 5.5s linear forwards;
   }
 
-  .is-paused .hero-ken-burns,
-  .is-paused .hero-progress-fill {
+  .is-paused .hero-ken-burns, .is-paused .hero-progress-fill {
     animation-play-state: paused;
   }
 
@@ -271,9 +270,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-ken-burns,
-    .hero-enter,
-    .hero-progress-fill {
+    .hero-ken-burns, .hero-enter, .hero-progress-fill {
       animation: none;
     }
   }

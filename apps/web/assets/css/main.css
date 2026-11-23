@@ -117,18 +117,7 @@
     @apply bg-background text-foreground font-sans selection:bg-primary/20 selection:text-foreground;
   }
 
-  .bg-dark::selection,
-  .bg-dark *::selection,
-  .bg-dark-deep::selection,
-  .bg-dark-deep *::selection,
-  .bg-gold-dark::selection,
-  .bg-gold-dark *::selection,
-  .from-dark::selection,
-  .from-dark *::selection,
-  .from-dark-deep::selection,
-  .from-dark-deep *::selection,
-  .surface-dark::selection,
-  .surface-dark *::selection {
+  .bg-dark::selection, .bg-dark *::selection, .bg-dark-deep::selection, .bg-dark-deep *::selection, .bg-gold-dark::selection, .bg-gold-dark *::selection, .from-dark::selection, .from-dark *::selection, .from-dark-deep::selection, .from-dark-deep *::selection, .surface-dark::selection, .surface-dark *::selection {
     background-color: hsl(var(--gold-bright) / 0.35);
     color: hsl(var(--background));
   }
@@ -166,8 +155,7 @@
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .link-editorial:hover::after,
-  .link-editorial:focus-visible::after {
+  .link-editorial:hover::after, .link-editorial:focus-visible::after {
     transform: scaleX(1);
   }
 

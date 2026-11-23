@@ -38,20 +38,17 @@
 </script>
 
 <style scoped>
-  .back-to-top-enter-active,
-  .back-to-top-leave-active {
+  .back-to-top-enter-active, .back-to-top-leave-active {
     transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .back-to-top-enter-from,
-  .back-to-top-leave-to {
+  .back-to-top-enter-from, .back-to-top-leave-to {
     opacity: 0;
     transform: translateY(10px) scale(0.92);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .back-to-top-enter-active,
-    .back-to-top-leave-active {
+    .back-to-top-enter-active, .back-to-top-leave-active {
       transition: none;
     }
   }

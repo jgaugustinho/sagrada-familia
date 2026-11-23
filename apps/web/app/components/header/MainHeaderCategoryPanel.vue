@@ -127,10 +127,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mega-featured-enter-active,
-    .mega-featured-leave-active,
-    .mega-featured-text-enter-active,
-    .mega-featured-text-leave-active {
+    .mega-featured-enter-active, .mega-featured-leave-active, .mega-featured-text-enter-active, .mega-featured-text-leave-active {
       transition: none;
     }
   }

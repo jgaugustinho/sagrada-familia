@@ -524,8 +524,7 @@
 </script>
 
 <style scoped>
-  .reading-fade-enter-active,
-  .reading-fade-leave-active {
+  .reading-fade-enter-active, .reading-fade-leave-active {
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
@@ -540,8 +539,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .reading-fade-enter-active,
-    .reading-fade-leave-active {
+    .reading-fade-enter-active, .reading-fade-leave-active {
       transition: none;
     }
   }
