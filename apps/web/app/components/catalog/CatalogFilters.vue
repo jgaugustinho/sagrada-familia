@@ -60,11 +60,11 @@
 
       <AccordionContent class="pb-4 pt-2">
         <div class="px-1.5">
-          <Slider aria-label="Faixa de preço" :min="priceBounds[ 0 ]" :max="priceBounds[ 1 ]" :step="1" :min-steps-between-thumbs="1" :model-value="priceRange" @update:model-value="handleSliderUpdate" />
+          <Slider aria-label="Faixa de preço" :min="priceBounds[ 0 ]" :max="priceBounds[ 1 ]" :step="1" :min-steps-between-thumbs="1" :model-value="sliderModelValue" @update:model-value="handleSliderUpdate" @value-commit="emit( 'commitPriceRange' )" />
 
           <div class="mt-2 flex items-center justify-between text-[11px] text-muted-foreground tabular-nums">
-            <span>{{ formatCurrency( priceBounds[ 0 ] ) }}</span>
-            <span>{{ formatCurrency( priceBounds[ 1 ] ) }}</span>
+            <span>{{ formatSliderBound( priceBounds[ 0 ] ) }}</span>
+            <span>{{ formatSliderBound( priceBounds[ 1 ] ) }}</span>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
               <span class="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground">
                 R$
               </span>
-              <Input type="number" inputmode="numeric" class="pl-8 pr-2 h-9 text-xs sm:text-sm tabular-nums" :id="`${ idPrefix }-price-min`" :min="priceBounds[ 0 ]" :max="priceRange[ 1 ]" :model-value="minDraft" @update:model-value="minDraft = String( $event )" @blur="commitMinInput" @keydown.enter="commitMinInput" />
+              <Input type="number" inputmode="numeric" class="pl-8 pr-2 h-9 text-xs sm:text-sm tabular-nums" :id="`${ idPrefix }-price-min`" :min="0" :max="priceBounds[ 1 ]" :model-value="minDraft" @update:model-value="minDraft = String( $event )" @blur="commitMinInput" @keydown.enter="handleEnterCommit( $event, commitMinInput )" />
             </div>
           </div>
 
@@ -89,7 +89,7 @@
               <span class="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-medium text-muted-foreground">
                 R$
               </span>
-              <Input type="number" inputmode="numeric" class="pl-8 pr-2 h-9 text-xs sm:text-sm tabular-nums" :id="`${ idPrefix }-price-max`" :min="priceRange[ 0 ]" :max="priceBounds[ 1 ]" :model-value="maxDraft" @update:model-value="maxDraft = String( $event )" @blur="commitMaxInput" @keydown.enter="commitMaxInput" />
+              <Input type="number" inputmode="numeric" class="pl-8 pr-2 h-9 text-xs sm:text-sm tabular-nums" :id="`${ idPrefix }-price-max`" :min="0" :max="priceBounds[ 1 ]" :model-value="maxDraft" @update:model-value="maxDraft = String( $event )" @blur="commitMaxInput" @keydown.enter="handleEnterCommit( $event, commitMaxInput )" />
             </div>
           </div>
         </div>
@@ -132,13 +132,21 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
   import { Checkbox } from '@/components/ui/checkbox';
   import { Input } from '@/components/ui/input';
   import { Slider } from '@/components/ui/slider';
   import type { CatalogContext } from '@/data/catalog';
-  import { formatCurrency } from '@/data/products';
+
+  const formatSliderBound = ( value: number ): string => {
+    return new Intl.NumberFormat( 'pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    } ).format( value );
+  };
 
   const props = defineProps<{
     context: CatalogContext;
@@ -157,6 +165,7 @@
     ( e: 'togglePrimary' | 'toggleDevotion', slug: string ): void;
     ( e: 'toggleAttribute', groupId: string, optionSlug: string ): void;
     ( e: 'update:priceRange', range: [ number, number ] ): void;
+    ( e: 'commitPriceRange' ): void;
   }>();
 
   const buildDefaultOpenSections = ( ctx: CatalogContext ): string[] => {
@@ -172,6 +181,13 @@
 
   const minDraft = ref<string>( String( props.priceRange[ 0 ] ) );
   const maxDraft = ref<string>( String( props.priceRange[ 1 ] ) );
+
+  const sliderModelValue = computed<[ number, number ]>( () => {
+    const [ boundMin, boundMax ] = props.priceBounds;
+    const clampedMin = Math.max( boundMin, Math.min( props.priceRange[ 0 ], boundMax ) );
+    const clampedMax = Math.max( clampedMin, Math.min( props.priceRange[ 1 ], boundMax ) );
+    return [ clampedMin, clampedMax ];
+  } );
 
   watch(
     () => [ props.context.slug, props.context.subslug ],
@@ -200,7 +216,7 @@
   };
 
   const commitMinInput = () => {
-    const [ boundMin ] = props.priceBounds;
+    const [ , boundMax ] = props.priceBounds;
     const currentMax = props.priceRange[ 1 ];
     const parsed = Number.parseFloat( minDraft.value );
 
@@ -209,13 +225,16 @@
       return;
     }
 
-    const clamped = Math.max( boundMin, Math.min( Math.round( parsed ), currentMax ) );
+    const clamped = Math.min( boundMax, Math.max( 0, Math.round( parsed ) ) );
     minDraft.value = String( clamped );
-    emit( 'update:priceRange', [ clamped, currentMax ] );
+    if ( clamped !== props.priceRange[ 0 ] ) {
+      emit( 'update:priceRange', [ clamped, currentMax ] );
+      emit( 'commitPriceRange' );
+    }
   };
 
   const commitMaxInput = () => {
-    const [ , boundMax ] = props.priceBounds;
+    const [ _, boundMax ] = props.priceBounds;
     const currentMin = props.priceRange[ 0 ];
     const parsed = Number.parseFloat( maxDraft.value );
 
@@ -224,8 +243,16 @@
       return;
     }
 
-    const clamped = Math.min( boundMax, Math.max( Math.round( parsed ), currentMin ) );
+    const clamped = Math.min( boundMax, Math.max( 0, Math.round( parsed ) ) );
     maxDraft.value = String( clamped );
-    emit( 'update:priceRange', [ currentMin, clamped ] );
+    if ( clamped !== props.priceRange[ 1 ] ) {
+      emit( 'update:priceRange', [ currentMin, clamped ] );
+      emit( 'commitPriceRange' );
+    }
+  };
+
+  const handleEnterCommit = ( event: KeyboardEvent, commitFn: () => void ) => {
+    commitFn();
+    ( event.target as HTMLInputElement | null )?.blur();
   };
 </script>

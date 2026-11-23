@@ -54,7 +54,7 @@
     </section>
 
     <!-- Two-Column Catalog Workspace -->
-    <section class="w-full bg-background surface-linen py-8 sm:py-12 flex-1" aria-label="Catálogo de produtos">
+    <section class="w-full bg-background surface-linen py-8 sm:py-12 flex-1 [overflow-anchor:none]" aria-label="Catálogo de produtos" ref="catalogWorkspaceRef">
       <div class="relative z-10 container mx-auto px-4">
         <div class="grid grid-cols-1 lg:grid-cols-[290px_minmax(0,1fr)] gap-7 lg:gap-9 items-start">
           <!-- Left Column: Sticky Desktop Filter Sidebar -->
@@ -76,7 +76,7 @@
                 </button>
               </div>
 
-              <CatalogFilters id-prefix="desktop" :context="context" :primary-counts="primaryCounts" :devotion-counts="devotionCounts" :attribute-counts="attributeCounts" :price-bounds="priceBounds" :selected-primary="selectedPrimary" :selected-devotions="selectedDevotions" :selected-attributes="selectedAttributes" :price-range="priceRange" @toggle-primary="togglePrimary" @toggle-devotion="toggleDevotion" @toggle-attribute="toggleAttribute" @update:price-range="updatePriceRange" />
+              <CatalogFilters id-prefix="desktop" :context="context" :primary-counts="primaryCounts" :devotion-counts="devotionCounts" :attribute-counts="attributeCounts" :price-bounds="priceBounds" :selected-primary="selectedPrimary" :selected-devotions="selectedDevotions" :selected-attributes="selectedAttributes" :price-range="priceRange" @toggle-primary="togglePrimary" @toggle-devotion="toggleDevotion" @toggle-attribute="toggleAttribute" @update:price-range="updatePriceRange" @commit-price-range="scrollToCatalogTopIfNeeded" />
             </div>
 
             <!-- Consultative Micro-Card -->
@@ -134,7 +134,7 @@
                       </SheetHeader>
 
                       <div class="flex-1 overflow-y-auto px-4 py-2">
-                        <CatalogFilters id-prefix="mobile" :context="context" :primary-counts="primaryCounts" :devotion-counts="devotionCounts" :attribute-counts="attributeCounts" :price-bounds="priceBounds" :selected-primary="selectedPrimary" :selected-devotions="selectedDevotions" :selected-attributes="selectedAttributes" :price-range="priceRange" @toggle-primary="togglePrimary" @toggle-devotion="toggleDevotion" @toggle-attribute="toggleAttribute" @update:price-range="updatePriceRange" />
+                        <CatalogFilters id-prefix="mobile" :context="context" :primary-counts="primaryCounts" :devotion-counts="devotionCounts" :attribute-counts="attributeCounts" :price-bounds="priceBounds" :selected-primary="selectedPrimary" :selected-devotions="selectedDevotions" :selected-attributes="selectedAttributes" :price-range="priceRange" @toggle-primary="togglePrimary" @toggle-devotion="toggleDevotion" @toggle-attribute="toggleAttribute" @update:price-range="updatePriceRange" @commit-price-range="scrollToCatalogTopIfNeeded" />
                       </div>
 
                       <SheetFooter class="p-4 border-t border-border bg-background shrink-0">
@@ -220,7 +220,7 @@
 
               <Button type="button" variant="outline" class="rounded-full border-primary/45 bg-background text-gold-dark hover:bg-primary hover:text-primary-foreground hover:border-primary px-5 sm:px-6 py-2 h-auto text-xs sm:text-sm font-semibold shadow-warm-sm transition-all cursor-pointer shrink-0 whitespace-nowrap" v-if="hasMoreProducts" @click="loadMoreProducts">
                 <Plus class="w-4 h-4" aria-hidden="true" />
-                <span>Carregar mais</span>
+                <span>Carregar mais produtos</span>
               </Button>
             </div>
           </div>
@@ -231,7 +231,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue';
+  import { computed, nextTick, ref, watch } from 'vue';
   import { Plus, SlidersHorizontal, TreePine, X } from '@lucide/vue';
   import CatalogFilters from '@/components/catalog/CatalogFilters.vue';
   import ProductCard from '@/components/product/ProductCard.vue';
@@ -288,6 +288,25 @@
   const sortBy = ref<SortOption>( 'relevance' );
   const visibleCount = ref<number>( PAGE_SIZE );
   const isMobileFiltersOpen = ref<boolean>( false );
+  const catalogWorkspaceRef = ref<HTMLElement | null>( null );
+
+  const scrollToCatalogTopIfNeeded = async () => {
+    await nextTick();
+    if ( typeof window === 'undefined' || !catalogWorkspaceRef.value ) {
+      return;
+    }
+
+    const rect = catalogWorkspaceRef.value.getBoundingClientRect();
+    const headerOffset = 84;
+    if ( rect.top < headerOffset ) {
+      const targetTop = Math.max( 0, window.scrollY + rect.top - headerOffset );
+      const prefersReducedMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+      window.scrollTo( {
+        top: targetTop,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      } );
+    }
+  };
 
   const cloneAttributeRecord = ( source: Record<string, string[]> ): Record<string, string[]> => {
     const copy: Record<string, string[]> = {};
@@ -480,11 +499,13 @@
       selectedPrimary.value = [ ...selectedPrimary.value, slug ];
     }
     visibleCount.value = PAGE_SIZE;
+    scrollToCatalogTopIfNeeded();
   };
 
   const clearPrimarySelection = () => {
     selectedPrimary.value = [];
     visibleCount.value = PAGE_SIZE;
+    scrollToCatalogTopIfNeeded();
   };
 
   const toggleDevotion = ( slug: string ) => {
@@ -494,6 +515,7 @@
       selectedDevotions.value = [ ...selectedDevotions.value, slug ];
     }
     visibleCount.value = PAGE_SIZE;
+    scrollToCatalogTopIfNeeded();
   };
 
   const toggleAttribute = ( groupId: string, optionSlug: string ) => {
@@ -507,11 +529,17 @@
       [ groupId ]: next
     };
     visibleCount.value = PAGE_SIZE;
+    scrollToCatalogTopIfNeeded();
   };
 
   const updatePriceRange = ( nextRange: [ number, number ] ) => {
     priceRange.value = nextRange;
     visibleCount.value = PAGE_SIZE;
+  };
+
+  const resetPriceRange = () => {
+    updatePriceRange( [ priceBounds.value[ 0 ], priceBounds.value[ 1 ] ] );
+    scrollToCatalogTopIfNeeded();
   };
 
   const clearAllFilters = () => {
@@ -520,6 +548,7 @@
     selectedAttributes.value = {};
     priceRange.value = [ priceBounds.value[ 0 ], priceBounds.value[ 1 ] ];
     visibleCount.value = PAGE_SIZE;
+    scrollToCatalogTopIfNeeded();
   };
 
   const loadMoreProducts = () => {
@@ -555,7 +584,7 @@
       chips.push( {
         key: 'price-range',
         label: `Preço: ${ formatCurrency( priceRange.value[ 0 ] ) } — ${ formatCurrency( priceRange.value[ 1 ] ) }`,
-        onRemove: () => updatePriceRange( [ priceBounds.value[ 0 ], priceBounds.value[ 1 ] ] )
+        onRemove: resetPriceRange
       } );
     }
 
@@ -578,6 +607,7 @@
 
   watch( sortBy, () => {
     visibleCount.value = PAGE_SIZE;
+    scrollToCatalogTopIfNeeded();
   } );
 </script>
 
