@@ -5,7 +5,8 @@ export default {
   presets: [ sharedPreset ],
   content: [
     './index.html',
-    './src/**/*.{vue,ts}'
+    './src/**/*.{vue,ts}',
+    '../../packages/ui/components/**/*.{vue,ts}'
   ]
 } satisfies Config;
 

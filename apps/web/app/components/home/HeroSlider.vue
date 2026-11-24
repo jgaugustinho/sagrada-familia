@@ -62,7 +62,7 @@
   import Autoplay from 'embla-carousel-autoplay';
   import { onUnmounted, ref } from 'vue';
   import { ArrowRight } from '@lucide/vue';
-  import { Button } from '@/components/ui/button';
+  import { Button } from '@sagrada-familia/ui/button';
   import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 
   const slides = [

@@ -236,7 +236,7 @@
 <script setup lang="ts">
   import { ChevronDown, Clock, Mail, MapPin, PackageCheck, QrCode, Truck } from '@lucide/vue';
   import AbsoluteFooter from '@/components/footer/AbsoluteFooter.vue';
-  import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+  import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@sagrada-familia/ui/accordion';
 
   const WHATSAPP_BUBBLE_PATH = 'M3 21l1.65-3.8A9 9 0 1 1 21 12a9 9 0 0 1-13.2 7.95L3 21z';
   const WHATSAPP_PHONE_PATH = 'M9.5 8.8c.2-.45.45-.46.7-.47h.55c.18 0 .42.06.64.52.23.48.77 1.72.84 1.85.07.13.12.28.02.45-.1.18-.15.29-.3.45-.15.16-.31.35-.44.47-.14.13-.29.28-.12.56.17.28.75 1.24 1.61 2 1.1.97 2.02 1.27 2.31 1.42.29.14.46.12.63-.07.17-.19.74-.85.94-1.15.2-.3.4-.25.67-.15.27.1 1.73.81 2.03.96.3.15.5.22.57.34.07.13.07.73-.18 1.44-.25.7-1.45 1.37-2 1.44-.51.07-1.16.1-1.88-.12-.44-.14-1-.32-1.72-.63-3.02-1.3-4.99-4.35-5.14-4.55-.15-.2-1.22-1.62-1.22-3.09 0-1.47.77-2.19 1.04-2.49z';

@@ -18,6 +18,7 @@ export default [
       '@stylistic/template-curly-spacing': [ 'error', 'always' ],
       '@stylistic/arrow-parens': [ 'error', 'always' ],
       '@stylistic/brace-style': [ 'error', '1tbs', { allowSingleLine: true } ],
+      '@typescript-eslint/no-unused-vars': [ 'error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true } ],
 
       // Vue SFC structure & template formatting
       'vue/block-order': [ 'error', { order: [ 'template', 'script', 'style' ] } ],
@@ -43,6 +44,7 @@ export default [
       'vue/first-attribute-linebreak': 'off',
       'vue/singleline-html-element-content-newline': 'off',
       'vue/multi-word-component-names': 'off',
+      'vue/require-default-prop': 'off',
       'vue/html-self-closing': [
         'error',
         {

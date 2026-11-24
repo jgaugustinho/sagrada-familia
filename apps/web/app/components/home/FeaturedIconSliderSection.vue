@@ -84,7 +84,7 @@
   import Autoplay from 'embla-carousel-autoplay';
   import { ref } from 'vue';
   import { ArrowLeft, ArrowRight } from '@lucide/vue';
-  import { Button } from '@/components/ui/button';
+  import { Button } from '@sagrada-familia/ui/button';
   import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
   import { featuredIconSlides } from '@/data/products';
 

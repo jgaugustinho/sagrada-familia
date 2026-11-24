@@ -106,7 +106,7 @@
   import { onUnmounted, ref } from 'vue';
   import { Check, ShoppingCart } from '@lucide/vue';
   import SectionHeader from '@/components/home/SectionHeader.vue';
-  import { Button } from '@/components/ui/button';
+  import { Button } from '@sagrada-familia/ui/button';
   import { useCartPreview } from '@/composables/useCartPreview';
   import { devotionScenarios, formatCurrency, getInstallmentPrice, getPixPrice, type DevotionScenario, type Product } from '@/data/products';
 

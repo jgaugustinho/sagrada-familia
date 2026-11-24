@@ -142,7 +142,7 @@
 <script setup lang="ts">
   import { computed, onMounted, ref, watch } from 'vue';
   import { BookOpen, CalendarDays, ChevronDown } from '@lucide/vue';
-  import { Button } from '@/components/ui/button';
+  import { Button } from '@sagrada-familia/ui/button';
 
   interface LiturgyReading {
     referencia: string;

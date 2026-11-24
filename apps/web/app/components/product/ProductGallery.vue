@@ -102,7 +102,7 @@
 <script setup lang="ts">
   import { computed, onUnmounted, ref, watch } from 'vue';
   import { ChevronLeft, ChevronRight, Expand, X } from '@lucide/vue';
-  import { Badge } from '@/components/ui/badge';
+  import { Badge } from '@sagrada-familia/ui/badge';
   import type { ProductMediaItem } from '@/data/product-details';
 
   const props = withDefaults( defineProps<{

@@ -235,11 +235,11 @@
   import { Plus, SlidersHorizontal, TreePine, X } from '@lucide/vue';
   import CatalogFilters from '@/components/catalog/CatalogFilters.vue';
   import ProductCard from '@/components/product/ProductCard.vue';
-  import { Badge } from '@/components/ui/badge';
-  import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-  import { Button } from '@/components/ui/button';
-  import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-  import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+  import { Badge } from '@sagrada-familia/ui/badge';
+  import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@sagrada-familia/ui/breadcrumb';
+  import { Button } from '@sagrada-familia/ui/button';
+  import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@sagrada-familia/ui/select';
+  import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@sagrada-familia/ui/sheet';
   import { getCatalogContext, type CatalogProduct } from '@/data/catalog';
   import { formatCurrency, getDiscountPercentage, getPixPrice } from '@/data/products';
 

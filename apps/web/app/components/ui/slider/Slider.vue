@@ -13,7 +13,7 @@
   import type { HTMLAttributes } from 'vue';
   import { computed } from 'vue';
   import { SliderRange, SliderRoot, SliderThumb, SliderTrack, useForwardPropsEmits } from 'reka-ui';
-  import { cn } from '@/lib/utils';
+  import { cn } from 'cn';
 
   const props = defineProps<SliderRootProps & { class?: HTMLAttributes[ 'class' ] }>();
   const emits = defineEmits<SliderRootEmits>();

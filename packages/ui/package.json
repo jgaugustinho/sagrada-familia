@@ -4,7 +4,26 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./styles.css": "./src/styles/tokens.css",
-    "./tailwind-preset": "./tailwind.preset.ts"
+    ".": "./index.ts",
+    "./styles.css": "./tokens.css",
+    "./tailwind-preset": "./tailwind.preset.ts",
+    "./accordion": "./components/accordion/index.ts",
+    "./badge": "./components/badge/index.ts",
+    "./breadcrumb": "./components/breadcrumb/index.ts",
+    "./button": "./components/button/index.ts",
+    "./checkbox": "./components/checkbox/index.ts",
+    "./input": "./components/input/index.ts",
+    "./select": "./components/select/index.ts",
+    "./separator": "./components/separator/index.ts",
+    "./sheet": "./components/sheet/index.ts"
+  },
+  "dependencies": {
+    "@lucide/vue": "^1.71.0",
+    "class-variance-authority": "^0.7.1",
+    "cn": "^0.5.2",
+    "reka-ui": "^2.11.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
   }
 }

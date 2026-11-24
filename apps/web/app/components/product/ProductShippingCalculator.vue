@@ -111,8 +111,8 @@
 <script setup lang="ts">
   import { computed, onUnmounted, ref } from 'vue';
   import { Loader2, MapPin, Sparkles, Truck } from '@lucide/vue';
-  import { Badge } from '@/components/ui/badge';
-  import { Button } from '@/components/ui/button';
+  import { Badge } from '@sagrada-familia/ui/badge';
+  import { Button } from '@sagrada-familia/ui/button';
   import { formatCurrency } from '@/data/products';
   import { calculateMockShipping, formatCep, FREE_SHIPPING_THRESHOLD, type ShippingQuoteResult } from '@/data/product-details';
 

@@ -158,7 +158,7 @@
   import Autoplay from 'embla-carousel-autoplay';
   import { ref } from 'vue';
   import { ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Quote, ShieldCheck, Star } from '@lucide/vue';
-  import { Button } from '@/components/ui/button';
+  import { Button } from '@sagrada-familia/ui/button';
   import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
   import { DUMMY_PRIMARY_IMAGE } from '@/data/products';
 

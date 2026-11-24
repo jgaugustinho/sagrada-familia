@@ -21,6 +21,9 @@ export default defineNuxtConfig( {
     }
   },
   css: [ '@sagrada-familia/ui/styles.css', '~~/assets/css/main.css' ],
+  build: {
+    transpile: [ '@sagrada-familia/ui' ]
+  },
   compatibilityDate: '2025-07-15',
   postcss: {
     plugins: {

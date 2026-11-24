@@ -255,9 +255,9 @@
   import ProductShareMenu from '@/components/product/ProductShareMenu.vue';
   import ProductShippingCalculator from '@/components/product/ProductShippingCalculator.vue';
   import ProductVariationSelector from '@/components/product/ProductVariationSelector.vue';
-  import { Badge } from '@/components/ui/badge';
-  import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-  import { Button } from '@/components/ui/button';
+  import { Badge } from '@sagrada-familia/ui/badge';
+  import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@sagrada-familia/ui/breadcrumb';
+  import { Button } from '@sagrada-familia/ui/button';
   import { useCartPreview } from '@/composables/useCartPreview';
   import { formatCurrency, getDiscountPercentage, getInstallmentPrice, getPixPrice } from '@/data/products';
   import { getPopularProducts, getProductDetailBySlug, getSimilarProducts, type ProductTechnicalSpec, type ProductVariationOption } from '@/data/product-details';

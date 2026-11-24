@@ -122,14 +122,14 @@
   import { Accordion,
            AccordionContent,
            AccordionItem,
-           AccordionTrigger } from '@/components/ui/accordion';
-  import { Separator } from '@/components/ui/separator';
+           AccordionTrigger } from '@sagrada-familia/ui/accordion';
+  import { Separator } from '@sagrada-familia/ui/separator';
   import { Sheet,
            SheetContent,
            SheetDescription,
            SheetHeader,
            SheetTitle,
-           SheetTrigger } from '@/components/ui/sheet';
+           SheetTrigger } from '@sagrada-familia/ui/sheet';
   import { allCategoriesMenu, categoryPath } from '@/data/main-menu';
   import { useAuthPreview } from '@/composables/useAuthPreview';
 

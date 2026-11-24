@@ -56,8 +56,8 @@
 <script setup lang="ts">
   import { computed, onUnmounted, ref } from 'vue';
   import { Check, ShoppingCart } from '@lucide/vue';
-  import { Badge } from '@/components/ui/badge';
-  import { Button } from '@/components/ui/button';
+  import { Badge } from '@sagrada-familia/ui/badge';
+  import { Button } from '@sagrada-familia/ui/button';
   import { useCartPreview } from '@/composables/useCartPreview';
   import { formatCurrency, getDiscountPercentage, getInstallmentPrice, getPixPrice, type Product } from '@/data/products';
 

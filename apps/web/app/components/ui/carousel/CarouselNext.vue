@@ -8,10 +8,10 @@
 
 <script setup lang="ts">
   import type { HTMLAttributes } from 'vue';
-  import type { ButtonVariants } from '@/components/ui/button';
+  import type { ButtonVariants } from '@sagrada-familia/ui/button';
   import { ChevronRight } from '@lucide/vue';
   import { cn } from 'cn';
-  import { Button } from '@/components/ui/button';
+  import { Button } from '@sagrada-familia/ui/button';
   import { useCarousel } from './useCarousel';
 
   const props = withDefaults( defineProps<{

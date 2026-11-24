@@ -94,7 +94,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+  import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@sagrada-familia/ui/accordion';
   import type { ProductEditorialDetail, ProductTechnicalSpec } from '@/data/product-details';
 
   defineProps<{
