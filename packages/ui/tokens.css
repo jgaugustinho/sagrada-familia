@@ -101,3 +101,124 @@
   --dark-foreground: 48 29% 97%;
   --dark-deep: 37 37% 12%;
 }
+
+/* Shared Brand Surfaces & Editorial Micro-Interactions */
+.bg-dark::selection, .bg-dark *::selection, .bg-dark-deep::selection, .bg-dark-deep *::selection, .bg-gold-dark::selection, .bg-gold-dark *::selection, .from-dark::selection, .from-dark *::selection, .from-dark-deep::selection, .from-dark-deep *::selection, .surface-dark::selection, .surface-dark *::selection {
+  background-color: hsl(var(--gold-bright) / 0.35);
+  color: hsl(var(--background));
+}
+
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(18px);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-editorial {
+  position: relative;
+}
+
+.link-editorial::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background-color: hsl(var(--primary));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-editorial:hover::after, .link-editorial:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-sheen::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: -120%;
+  width: 65%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-sheen:hover::after {
+  transform: translateX(360%) skewX(-18deg);
+}
+
+.surface-linen {
+  position: relative;
+  isolation: isolate;
+}
+
+.surface-linen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.095;
+  background-image:
+    repeating-linear-gradient(0deg, hsl(40 50% 27% / 0.45) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, hsl(40 50% 27% / 0.35) 0 1px, transparent 1px 5px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-0.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-0.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-0.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat, repeat, repeat;
+  background-size: 5px 5px, 5px 5px, 200px 200px;
+  mix-blend-mode: multiply;
+}
+
+.dark .surface-linen::before {
+  opacity: 0.08;
+  background-image:
+    repeating-linear-gradient(0deg, hsl(39 46% 61% / 0.38) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, hsl(39 46% 61% / 0.28) 0 1px, transparent 1px 5px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-0.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-0.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-0.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+.logo-gold {
+  filter: brightness(0) invert(0.76) sepia(0.36) saturate(1.15) hue-rotate(2deg) brightness(1.02);
+}
+
+.wordmark-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, rgba(0, 0, 0, 0.22) 100%);
+  mask-image: linear-gradient(to bottom, #000 50%, rgba(0, 0, 0, 0.22) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  .reveal-visible {
+    transition: none;
+  }
+
+  .link-editorial::after {
+    transition: none;
+  }
+
+  .btn-sheen::after {
+    display: none;
+  }
+}

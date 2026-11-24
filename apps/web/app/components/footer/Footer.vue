@@ -315,20 +315,11 @@
 </script>
 
 <style scoped>
-  .logo-gold {
-    filter: brightness(0) invert(0.76) sepia(0.36) saturate(1.15) hue-rotate(2deg) brightness(1.02);
-  }
-
   .footer-link::after {
     background-color: hsl(var(--gold-bright));
   }
 
   .group\/link:hover .footer-link::after, .group\/link:focus-visible .footer-link::after {
     transform: scaleX(1);
-  }
-
-  .wordmark-fade {
-    -webkit-mask-image: linear-gradient(to bottom, #000 50%, rgba(0, 0, 0, 0.22) 100%);
-    mask-image: linear-gradient(to bottom, #000 50%, rgba(0, 0, 0, 0.22) 100%);
   }
 </style>

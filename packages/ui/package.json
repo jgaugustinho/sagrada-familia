@@ -11,8 +11,10 @@
     "./badge": "./components/badge/index.ts",
     "./breadcrumb": "./components/breadcrumb/index.ts",
     "./button": "./components/button/index.ts",
+    "./card": "./components/card/index.ts",
     "./checkbox": "./components/checkbox/index.ts",
     "./input": "./components/input/index.ts",
+    "./label": "./components/label/index.ts",
     "./select": "./components/select/index.ts",
     "./separator": "./components/separator/index.ts",
     "./sheet": "./components/sheet/index.ts"
