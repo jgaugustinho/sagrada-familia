@@ -20,7 +20,7 @@ export default defineNuxtConfig( {
       ]
     }
   },
-  css: [ '~~/assets/css/main.css' ],
+  css: [ '@sagrada-familia/ui/styles.css', '~~/assets/css/main.css' ],
   compatibilityDate: '2025-07-15',
   postcss: {
     plugins: {
