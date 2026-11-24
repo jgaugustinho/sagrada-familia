@@ -8,7 +8,7 @@
 
       <!-- Logo: Centered on mobile, Left on desktop -->
       <NuxtLink to="/" class="flex items-center justify-center md:justify-start shrink-0" aria-label="Página Inicial - Sagrada Família">
-        <img src="/images/horizontal_2D_logo.png" alt="Sagrada Família - Artigos Religiosos" class="h-12 md:h-16 w-auto object-contain" />
+        <img alt="Sagrada Família - Artigos Religiosos" class="h-12 md:h-16 w-auto object-contain" :src="horizontal2dLogo" />
       </NuxtLink>
 
       <!-- Search Input: Second row full-width on mobile, Centered flex-1 on desktop -->
@@ -56,6 +56,7 @@
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
   import { Search, ShoppingCart, User } from '@lucide/vue';
+  import { horizontal2dLogo } from '@sagrada-familia/assets';
   import MobileMenu from '@/components/header/MobileMenu.vue';
   import { useAuthPreview } from '@/composables/useAuthPreview';
   import { useCartPreview } from '@/composables/useCartPreview';

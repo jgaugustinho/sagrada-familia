@@ -11,6 +11,7 @@ export default defineNuxtConfig( {
   app: {
     head: {
       link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
@@ -20,9 +21,9 @@ export default defineNuxtConfig( {
       ]
     }
   },
-  css: [ '@sagrada-familia/ui/styles.css', '~~/assets/css/main.css' ],
+  css: [ '@sagrada-familia/ui/shared-styles.css', '~~/assets/css/main.css' ],
   build: {
-    transpile: [ '@sagrada-familia/ui' ]
+    transpile: [ '@sagrada-familia/ui', '@sagrada-familia/assets' ]
   },
   compatibilityDate: '2025-07-15',
   postcss: {

@@ -13,6 +13,7 @@
   "dependencies": {
     "@lucide/vue": "^1.71.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
+    "@sagrada-familia/assets": "*",
     "@sagrada-familia/ui": "*",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",

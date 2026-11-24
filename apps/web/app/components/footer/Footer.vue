@@ -73,7 +73,7 @@
         <!-- Column 1: Vertical Gold Crest & Socials -->
         <div class="min-w-0 flex flex-col items-center text-center md:items-start md:text-left">
           <NuxtLink to="/" class="group inline-flex items-center rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-bright focus-visible:ring-offset-2 focus-visible:ring-offset-dark-deep" aria-label="Página Inicial — Sagrada Família">
-            <img src="/images/vertical_2D_logo.png" alt="Sagrada Família — Artigos Religiosos" class="logo-gold block h-16 md:h-20 w-auto object-contain select-none transition-[filter,transform] duration-300 motion-reduce:transition-none group-hover:brightness-110" />
+            <img alt="Sagrada Família — Artigos Religiosos" class="logo-gold block h-16 md:h-20 w-auto object-contain select-none transition-[filter,transform] duration-300 motion-reduce:transition-none group-hover:brightness-110" :src="vertical2dLogo" />
           </NuxtLink>
 
           <p class="mt-1.5 text-sm text-background/75 leading-relaxed max-w-sm">
@@ -235,6 +235,7 @@
 
 <script setup lang="ts">
   import { ChevronDown, Clock, Mail, MapPin, PackageCheck, QrCode, Truck } from '@lucide/vue';
+  import { vertical2dLogo } from '@sagrada-familia/assets';
   import AbsoluteFooter from '@/components/footer/AbsoluteFooter.vue';
   import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@sagrada-familia/ui/accordion';
 

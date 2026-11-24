@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import sharedPreset from '../../packages/ui/tailwind.preset';
+import sharedPreset from '../../packages/ui/tailwind.shared';
 
 export default {
   presets: [ sharedPreset ],

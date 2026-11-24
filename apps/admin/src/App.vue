@@ -16,7 +16,7 @@
       </div>
 
       <div class="relative z-10 flex items-center justify-between gap-4">
-        <img src="/images/horizontal_2D_logo.png" alt="Sagrada Família — Artigos Religiosos" class="logo-gold block h-16 xl:h-[4.5rem] w-auto object-contain select-none" />
+        <img alt="Sagrada Família — Artigos Religiosos" class="logo-gold block h-16 xl:h-[4.5rem] w-auto object-contain select-none" :src="horizontal2dLogo" />
 
         <span class="inline-flex items-center gap-1.5 rounded-full border border-gold-bright/30 bg-gold-bright/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-gold-bright">Painel Administrativo</span>
       </div>
@@ -68,7 +68,7 @@
     <section class="lg:col-span-7 xl:col-span-6 relative flex flex-col justify-center lg:justify-between gap-5 lg:gap-0 min-h-screen lg:min-h-0 bg-background surface-linen px-5 py-6 sm:px-10 sm:py-8" aria-labelledby="login-heading">
       <div class="relative z-10">
         <div class="lg:hidden flex flex-col items-center text-center gap-2.5">
-          <img src="/images/vertical_3D_logo.png" alt="Sagrada Família — Artigos Religiosos" class="block h-32 sm:h-40 w-auto object-contain select-none" />
+          <img alt="Sagrada Família — Artigos Religiosos" class="block h-32 sm:h-40 w-auto object-contain select-none" :src="vertical3dLogo" />
           <div class="flex items-center justify-center gap-3 w-full max-w-[300px]">
             <span class="h-px flex-1 bg-gold-light/60" aria-hidden="true" />
             <span class="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-dark whitespace-nowrap">PAINEL ADMINISTRATIVO</span>
@@ -174,6 +174,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { ArrowRight, Eye, EyeOff, Lock, Mail, PackageCheck, ShieldCheck, Sparkles } from '@lucide/vue';
+  import { horizontal2dLogo, vertical3dLogo } from '@sagrada-familia/assets';
   import { Button } from '@sagrada-familia/ui/button';
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@sagrada-familia/ui/card';
   import { Checkbox } from '@sagrada-familia/ui/checkbox';
