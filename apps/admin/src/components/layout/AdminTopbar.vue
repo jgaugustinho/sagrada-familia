@@ -27,6 +27,18 @@
             <BreadcrumbSeparator class="hidden md:inline-flex" />
           </template>
 
+          <template v-if="parentRoute">
+            <BreadcrumbItem class="hidden sm:inline-flex">
+              <BreadcrumbLink :as-child="true">
+                <RouterLink class="text-xs font-medium text-muted-foreground hover:text-gold-dark" :to="{ name: parentRoute.name }">
+                  {{ parentRoute.label }}
+                </RouterLink>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbSeparator class="hidden sm:inline-flex" />
+          </template>
+
           <BreadcrumbItem class="min-w-0">
             <BreadcrumbPage class="text-xs sm:text-sm font-semibold text-foreground truncate">
               {{ pageTitle }}
@@ -85,6 +97,10 @@
 
   const showSectionBreadcrumb = computed( () => {
     return route.name !== 'dashboard' && sectionLabel.value.length > 0;
+  } );
+
+  const parentRoute = computed( () => {
+    return route.meta.parentRoute;
   } );
 
   const handleOpenMobileMenu = () => {

@@ -61,7 +61,7 @@
 <script setup lang="ts">
   import type { Component } from 'vue';
   import { computed } from 'vue';
-  import { ArrowLeft, BarChart3, CheckCircle2, FolderTree, Package, Settings, ShoppingBag, SlidersHorizontal, TicketPercent, Users } from '@lucide/vue';
+  import { ArrowLeft, BarChart3, CheckCircle2, FolderTree, Settings, ShoppingBag, SlidersHorizontal, TicketPercent, Users } from '@lucide/vue';
   import { RouterLink } from 'vue-router';
   import { Badge } from '@sagrada-familia/ui/badge';
   import { Button } from '@sagrada-familia/ui/button';
@@ -76,7 +76,7 @@
 
   const config = computed( () => modulePlaceholders[ props.moduleKey ] );
 
-  type AdminModuleKey = 'products' | 'categories' | 'attributes' | 'orders' | 'clients' | 'coupons' | 'reports' | 'settings';
+  type AdminModuleKey = 'categories' | 'attributes' | 'orders' | 'clients' | 'coupons' | 'reports' | 'settings';
 
   interface ModulePlaceholderConfig {
     key: AdminModuleKey;
@@ -92,23 +92,6 @@
   }
 
   const modulePlaceholders: Record<AdminModuleKey, ModulePlaceholderConfig> = {
-    products: {
-      key: 'products',
-      section: 'Catálogo',
-      eyebrow: 'CATÁLOGO & ACERVO',
-      title: 'Produtos',
-      subtitle: 'Cadastro, organização e manutenção completa das peças do catálogo sacro.',
-      icon: Package,
-      statusLabel: 'Próximo módulo',
-      isPriority: true,
-      summary: 'Este espaço receberá o cadastro completo de produtos da Sagrada Família, incluindo gestão de variações, galeria editorial, precificação e controle de estoque.',
-      plannedFeatures: [
-        'Cadastro completo de peças sacras e especificações técnicas (CRUD)',
-        'Gestão de variações, acabamentos, tamanhos e SKUs',
-        'Upload e ordenação de galeria de imagens do produto',
-        'Precificação, preço promocional, parcelamento e estoque'
-      ]
-    },
     categories: {
       key: 'categories',
       section: 'Catálogo',

@@ -21,7 +21,7 @@
     <div class="flex-1 min-w-0 flex flex-col bg-background surface-linen">
       <AdminTopbar @open-mobile-menu="openMobileMenu" />
 
-      <main class="relative z-10 flex-1 w-full max-w-[1440px] mx-auto px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
+      <main class="relative z-10 flex-1 w-full px-5 py-6 sm:px-8 sm:py-8 lg:px-10">
         <RouterView />
       </main>
     </div>

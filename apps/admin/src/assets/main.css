@@ -10,4 +10,9 @@
   body {
     @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-foreground;
   }
+
+  input[type='search']::-webkit-search-cancel-button, input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
 }

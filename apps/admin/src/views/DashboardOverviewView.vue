@@ -93,7 +93,7 @@
     },
     {
       key: 'products',
-      label: 'Produtos Ativos',
+      label: 'Produtos Publicados',
       value: '168',
       caption: '12 com alerta de estoque',
       icon: Package

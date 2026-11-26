@@ -107,7 +107,7 @@
   const route = useRoute();
 
   const isRouteActive = ( routeName: string ): boolean => {
-    return route.name === routeName;
+    return route.name === routeName || route.meta.activeNav === routeName;
   };
 
   const handleToggleCollapse = () => {

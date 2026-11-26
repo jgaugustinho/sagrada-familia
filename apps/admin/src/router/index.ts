@@ -3,11 +3,18 @@ import DashboardLayout from '@/layouts/DashboardLayout.vue';
 import DashboardOverviewView from '@/views/DashboardOverviewView.vue';
 import LoginView from '@/views/LoginView.vue';
 import ModulePlaceholderView from '@/views/ModulePlaceholderView.vue';
+import ProductFormPlaceholderView from '@/views/ProductFormPlaceholderView.vue';
+import ProductsView from '@/views/ProductsView.vue';
 
 declare module 'vue-router' {
   interface RouteMeta {
     title?: string;
     section?: string;
+    activeNav?: string;
+    parentRoute?: {
+      label: string;
+      name: string;
+    };
   }
 }
 
@@ -39,9 +46,30 @@ const router = createRouter( {
         {
           path: 'produtos',
           name: 'products',
-          component: ModulePlaceholderView,
-          props: { moduleKey: 'products' },
+          component: ProductsView,
           meta: { title: 'Produtos', section: 'Catálogo' }
+        },
+        {
+          path: 'produtos/novo',
+          name: 'product-create',
+          component: ProductFormPlaceholderView,
+          meta: {
+            title: 'Novo Produto',
+            section: 'Catálogo',
+            activeNav: 'products',
+            parentRoute: { label: 'Produtos', name: 'products' }
+          }
+        },
+        {
+          path: 'produtos/:id/editar',
+          name: 'product-edit',
+          component: ProductFormPlaceholderView,
+          meta: {
+            title: 'Editar Produto',
+            section: 'Catálogo',
+            activeNav: 'products',
+            parentRoute: { label: 'Produtos', name: 'products' }
+          }
         },
         {
           path: 'categorias',
