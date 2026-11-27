@@ -2,11 +2,11 @@
   <main class="min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-background text-foreground">
     <!-- Left Atelier Brand Panel -->
     <aside class="hidden lg:flex lg:col-span-5 xl:col-span-6 relative flex-col justify-between overflow-hidden bg-dark-deep text-background surface-dark border-r border-gold-light/20 p-8 xl:p-12" aria-label="Apresentação do Painel Administrativo">
-      <img class="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1465848059293-208e11dfea17?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D" alt="Interior da Basílica de Santa Maria com altar e arcos sacros" aria-hidden="true" />
+      <img class="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-center" alt="Fachada da loja Sagrada Família Artigos Religiosos" aria-hidden="true" :src="storefrontImage" />
 
       <!-- Layered dark-espresso shading for text legibility and warm gold depth -->
-      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-deep/95 via-dark-deep/75 to-dark-deep/80" aria-hidden="true" />
-      <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-dark-deep/85 via-dark/55 to-dark-deep/35" aria-hidden="true" />
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-deep/95 via-dark-deep/85 to-dark-deep/90" aria-hidden="true" />
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-dark-deep/90 via-dark-deep/70 to-dark-deep/55" aria-hidden="true" />
       <div class="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full bg-gold-bright/[0.09] blur-3xl" aria-hidden="true" />
 
       <div class="pointer-events-none select-none absolute inset-x-0 bottom-0 overflow-hidden text-center" aria-hidden="true">
@@ -173,6 +173,7 @@
   import { ArrowRight, Eye, EyeOff, Lock, Mail, PackageCheck, ShieldCheck, Sparkles } from '@lucide/vue';
   import { useRouter } from 'vue-router';
   import { horizontal2dLogo, vertical3dLogo } from '@sagrada-familia/assets';
+  import storefrontImage from '@/assets/storefront.jpg';
   import { Button } from '@sagrada-familia/ui/button';
   import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@sagrada-familia/ui/card';
   import { Checkbox } from '@sagrada-familia/ui/checkbox';
