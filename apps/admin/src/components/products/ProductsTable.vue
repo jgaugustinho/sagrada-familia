@@ -81,17 +81,31 @@
                 <img class="size-11 rounded-lg border border-gold-light/35 bg-surface/60 object-cover shrink-0 shadow-warm-sm" loading="lazy" :src="product.imageUrl" :alt="product.name" />
 
                 <div class="min-w-0 flex-1 space-y-0.5">
-                  <Tooltip>
-                    <TooltipTrigger :as-child="true">
-                      <RouterLink class="block w-full truncate text-left text-sm font-semibold text-foreground hover:text-gold-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm cursor-pointer" :to="{ name: 'product-edit', params: { id: product.id } }">
-                        {{ product.name }}
-                      </RouterLink>
-                    </TooltipTrigger>
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <Tooltip>
+                      <TooltipTrigger :as-child="true">
+                        <RouterLink class="min-w-0 truncate text-left text-sm font-semibold text-foreground hover:text-gold-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm cursor-pointer" :to="{ name: 'product-edit', params: { id: product.id } }">
+                          {{ product.name }}
+                        </RouterLink>
+                      </TooltipTrigger>
 
-                    <TooltipContent side="top" align="start" class="max-w-xs whitespace-normal break-words leading-snug">
-                      {{ product.name }}
-                    </TooltipContent>
-                  </Tooltip>
+                      <TooltipContent side="top" align="start" class="max-w-xs whitespace-normal break-words leading-snug">
+                        {{ product.name }}
+                      </TooltipContent>
+                    </Tooltip>
+
+                    <Tooltip>
+                      <TooltipTrigger :as-child="true">
+                        <button type="button" class="inline-flex items-center justify-center size-6 rounded-md text-muted-foreground/70 hover:text-gold-dark hover:bg-surface transition-colors shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" :aria-label="`Edição rápida de ${ product.name }`" @click="emit( 'view', product )">
+                          <PanelRightOpen class="size-3.5" aria-hidden="true" />
+                        </button>
+                      </TooltipTrigger>
+
+                      <TooltipContent side="top">
+                        Edição rápida
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
 
                   <div class="flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
                     <span class="font-mono tracking-tight">{{ product.sku }}</span>
@@ -184,13 +198,13 @@
 
                 <DropdownMenuContent align="end" class="w-48">
                   <DropdownMenuItem @select="emit( 'view', product )">
-                    <Eye class="size-4 text-gold-dark" aria-hidden="true" />
-                    <span>Visualizar</span>
+                    <PanelRightOpen class="size-4 text-gold-dark" aria-hidden="true" />
+                    <span>Edição rápida</span>
                   </DropdownMenuItem>
 
                   <DropdownMenuItem @select="emit( 'edit', product )">
-                    <Pencil class="size-4 text-gold-dark" aria-hidden="true" />
-                    <span>Editar</span>
+                    <FilePenLine class="size-4 text-gold-dark" aria-hidden="true" />
+                    <span>Edição completa</span>
                   </DropdownMenuItem>
 
                   <DropdownMenuItem @select="emit( 'duplicate', product )">
@@ -211,7 +225,7 @@
                   </DropdownMenuItem>
 
                   <DropdownMenuItem v-if="product.status !== 'archived'" @select="emit( 'changeStatus', product, 'archived' )">
-                    <Archive class="size-4 text-muted-foreground" aria-hidden="true" />
+                    <Archive class="size-4 text-slate-600" aria-hidden="true" />
                     <span>Arquivar</span>
                   </DropdownMenuItem>
 
@@ -265,7 +279,7 @@
 <script setup lang="ts">
   import type { Component } from 'vue';
   import { computed } from 'vue';
-  import { Archive, ArrowDown, ArrowUp, ArrowUpDown, Check, CheckCircle2, Copy, Eye, FileEdit, Layers, Minus, MoreHorizontal, PackageSearch, Pencil, Plus, Tag, Trash2 } from '@lucide/vue';
+  import { Archive, ArrowDown, ArrowUp, ArrowUpDown, Check, CheckCircle2, Copy, FileEdit, FilePenLine, Layers, Minus, MoreHorizontal, PackageSearch, PanelRightOpen, Plus, Tag, Trash2 } from '@lucide/vue';
   import { RouterLink } from 'vue-router';
   import { Badge } from '@sagrada-familia/ui/badge';
   import { Button } from '@sagrada-familia/ui/button';

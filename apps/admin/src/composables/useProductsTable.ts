@@ -27,6 +27,17 @@ export interface ProductsKpiStats {
   outOfStock: number;
 }
 
+export interface QuickEditProductPayload {
+  name: string;
+  sku: string;
+  categorySlug: string;
+  subCategorySlug: string;
+  price: number;
+  originalPrice?: number;
+  stock: number;
+  status: ProductStatus;
+}
+
 const SEARCH_DEBOUNCE_MS = 300;
 
 const COLUMN_DEFINITIONS: { key: ToggleableColumnKey; label: string }[] = [
@@ -727,6 +738,42 @@ export const useProductsTable = () => {
     return { ...target, status, updatedAt: nowIso };
   };
 
+  const quickUpdateProduct = ( id: string, payload: QuickEditProductPayload ): AdminProduct | null => {
+    const target = products.value.find( ( item ) => item.id === id );
+    if ( !target ) {
+      return null;
+    }
+
+    const category = getCategoryBySlug( payload.categorySlug );
+    const subCategory = getSubCategoryBySlug( payload.categorySlug, payload.subCategorySlug );
+    const nextPrice = roundPrice( payload.price );
+    const nextOriginalPrice = payload.originalPrice !== undefined && payload.originalPrice > nextPrice
+      ? roundPrice( payload.originalPrice )
+      : undefined;
+    const nowIso = new Date().toISOString();
+
+    const updated: AdminProduct = {
+      ...target,
+      name: payload.name.trim() || target.name,
+      sku: payload.sku.trim() || target.sku,
+      categorySlug: category?.slug ?? target.categorySlug,
+      categoryLabel: category?.label ?? target.categoryLabel,
+      subCategorySlug: subCategory?.slug ?? target.subCategorySlug,
+      subCategoryLabel: subCategory?.label ?? target.subCategoryLabel,
+      price: nextPrice,
+      originalPrice: nextOriginalPrice,
+      stock: Math.max( 0, Math.round( payload.stock ) ),
+      status: payload.status,
+      updatedAt: nowIso
+    };
+
+    products.value = products.value.map( ( item ) => (
+      item.id === id ? updated : item
+    ) );
+
+    return updated;
+  };
+
   const deleteProduct = ( id: string ): AdminProduct | null => {
     const target = products.value.find( ( item ) => item.id === id );
     if ( !target ) {
@@ -842,5 +889,5 @@ export const useProductsTable = () => {
     return targetIds.size;
   };
 
-  return { products, searchQuery, isSearchPending, statusTab, selectedCategories, selectedSubCategories, selectedStockStatuses, onlyOnSale, statusCounts, kpiStats, activeKpiKey, activeFilterChips, hasActiveFilters, sortBy, sortDirection, visibleColumns, columnOptions, page, pageSize, totalFiltered, paginatedProducts, pageRangeStart, pageRangeEnd, selectedProducts, selectedCount, selectAllMatching, pageSelectionState, showSelectAllBanner, isRowSelected, toggleRow, toggleCurrentPage, selectAllFiltered, clearSelection, toggleCategory, toggleSubCategory, toggleStockStatus, toggleKpiFilter, clearAllFilters, toggleSort, toggleColumnVisibility, resetVisibleColumns, duplicateProduct, updateProductStatus, deleteProduct, bulkUpdateStatus, bulkUpdatePrice, bulkUpdatePromotion, bulkUpdateStock, bulkUpdateCategory, bulkDelete };
+  return { products, searchQuery, isSearchPending, statusTab, selectedCategories, selectedSubCategories, selectedStockStatuses, onlyOnSale, statusCounts, kpiStats, activeKpiKey, activeFilterChips, hasActiveFilters, sortBy, sortDirection, visibleColumns, columnOptions, page, pageSize, totalFiltered, paginatedProducts, pageRangeStart, pageRangeEnd, selectedProducts, selectedCount, selectAllMatching, pageSelectionState, showSelectAllBanner, isRowSelected, toggleRow, toggleCurrentPage, selectAllFiltered, clearSelection, toggleCategory, toggleSubCategory, toggleStockStatus, toggleKpiFilter, clearAllFilters, toggleSort, toggleColumnVisibility, resetVisibleColumns, duplicateProduct, updateProductStatus, quickUpdateProduct, deleteProduct, bulkUpdateStatus, bulkUpdatePrice, bulkUpdatePromotion, bulkUpdateStock, bulkUpdateCategory, bulkDelete };
 };

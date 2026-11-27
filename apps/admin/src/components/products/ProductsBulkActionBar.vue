@@ -42,7 +42,7 @@
             </DropdownMenuItem>
 
             <DropdownMenuItem @select="emit( 'bulkStatus', 'archived' )">
-              <Archive class="size-4 text-muted-foreground" aria-hidden="true" />
+              <Archive class="size-4 text-slate-600" aria-hidden="true" />
               <span>Arquivado</span>
             </DropdownMenuItem>
           </DropdownMenuContent>

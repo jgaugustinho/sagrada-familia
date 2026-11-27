@@ -25,7 +25,7 @@
       <TablePaginationBar :page="page" :page-size="pageSize" :total-items="totalFiltered" :page-range-start="pageRangeStart" :page-range-end="pageRangeEnd" @update:page="page = $event" @update:page-size="pageSize = $event" />
     </Card>
 
-    <ProductsQuickViewSheet :open="isQuickViewOpen" :product="quickViewProduct" @update:open="isQuickViewOpen = $event" @duplicate="handleDuplicateProduct" @change-status="handleChangeProductStatus" />
+    <ProductsQuickViewSheet :open="isQuickViewOpen" :product="quickViewProduct" @update:open="isQuickViewOpen = $event" @duplicate="handleDuplicateProduct" @save="handleQuickSaveProduct" />
 
     <ProductsBulkDialogs :active-modal="activeBulkModal" :selected-products="selectedProducts" :single-delete-target="singleDeleteTarget" @update:active-modal="activeBulkModal = $event" @confirm-price="handleBulkPrice" @confirm-promotion="handleBulkPromotion" @confirm-stock="handleBulkStock" @confirm-category="handleBulkCategory" @confirm-delete="handleConfirmDelete" />
   </div>
@@ -47,63 +47,12 @@
   import ProductsToolbar from '@/components/products/ProductsToolbar.vue';
   import TableColumnToggle from '@/components/table/TableColumnToggle.vue';
   import TablePaginationBar from '@/components/table/TablePaginationBar.vue';
-  import { useProductsTable, type BulkPriceMode, type BulkPromotionMode, type BulkStockMode } from '@/composables/useProductsTable';
+  import { useProductsTable, type BulkPriceMode, type BulkPromotionMode, type BulkStockMode, type QuickEditProductPayload } from '@/composables/useProductsTable';
   import { getCategoryBySlug, getSubCategoryBySlug, PRODUCT_STATUS_META, type AdminProduct, type ProductStatus } from '@/data/products';
 
   const router = useRouter();
 
-  const {
-    products,
-    searchQuery,
-    isSearchPending,
-    statusTab,
-    selectedCategories,
-    selectedSubCategories,
-    selectedStockStatuses,
-    onlyOnSale,
-    statusCounts,
-    activeFilterChips,
-    visibleColumns,
-    columnOptions,
-    sortBy,
-    sortDirection,
-    page,
-    pageSize,
-    kpiStats,
-    activeKpiKey,
-    totalFiltered,
-    paginatedProducts,
-    pageRangeStart,
-    pageRangeEnd,
-    hasActiveFilters,
-    selectedProducts,
-    selectedCount,
-    selectAllMatching,
-    pageSelectionState,
-    showSelectAllBanner,
-    isRowSelected,
-    toggleRow,
-    toggleCurrentPage,
-    selectAllFiltered,
-    clearSelection,
-    toggleCategory,
-    toggleSubCategory,
-    toggleStockStatus,
-    toggleKpiFilter,
-    clearAllFilters,
-    toggleSort,
-    toggleColumnVisibility,
-    resetVisibleColumns,
-    duplicateProduct,
-    updateProductStatus,
-    deleteProduct,
-    bulkUpdateStatus,
-    bulkUpdatePrice,
-    bulkUpdatePromotion,
-    bulkUpdateStock,
-    bulkUpdateCategory,
-    bulkDelete
-  } = useProductsTable();
+  const { products, searchQuery, isSearchPending, statusTab, selectedCategories, selectedSubCategories, selectedStockStatuses, onlyOnSale, statusCounts, activeFilterChips, visibleColumns, columnOptions, sortBy, sortDirection, page, pageSize, kpiStats, activeKpiKey, totalFiltered, paginatedProducts, pageRangeStart, pageRangeEnd, hasActiveFilters, selectedProducts, selectedCount, selectAllMatching, pageSelectionState, showSelectAllBanner, isRowSelected, toggleRow, toggleCurrentPage, selectAllFiltered, clearSelection, toggleCategory, toggleSubCategory, toggleStockStatus, toggleKpiFilter, clearAllFilters, toggleSort, toggleColumnVisibility, resetVisibleColumns, duplicateProduct, updateProductStatus, quickUpdateProduct, deleteProduct, bulkUpdateStatus, bulkUpdatePrice, bulkUpdatePromotion, bulkUpdateStock, bulkUpdateCategory, bulkDelete } = useProductsTable();
 
   const quickViewProductId = ref<string | null>( null );
   const activeBulkModal = ref<BulkModalType>( null );
@@ -158,6 +107,17 @@
     if ( updated ) {
       toast.success( `Status alterado para ${ PRODUCT_STATUS_META[ status ].label }`, {
         description: updated.name
+      } );
+    }
+  };
+
+  const handleQuickSaveProduct = ( productId: string, payload: QuickEditProductPayload ) => {
+    const updated = quickUpdateProduct( productId, payload );
+    quickViewProductId.value = null;
+
+    if ( updated ) {
+      toast.success( 'Produto atualizado', {
+        description: `${ updated.name } (${ updated.sku })`
       } );
     }
   };
